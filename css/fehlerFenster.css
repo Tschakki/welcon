@@ -1,0 +1,23 @@
+form { padding: 20px; width: 280px; overflow: hidden; }
+
+fieldset { padding: 10px; border: 1px solid black; margin-bottom: 5px; }
+
+li { padding: 10px; }
+input[type=submit] { float: right; margin-top: 10px; }
+input[type=text]:valid {
+color: green;
+}
+input[type=text]:invalid {
+color: red;
+}
+
+#icon {
+display: inline-block;
+position: relative;
+}
+.icon-green {
+color: green;
+}
+.icon-red{
+color: red;
+}

@@ -1,0 +1,32 @@
+[
+    {
+      "name":"One winterjacket for free!",
+      "categoryIcon":"res/coat4.png",
+      "image":"res/Mens-Winter-Jacket.jpg",
+      "lon":"13.459560",
+      "lat":"52.511422",
+      "details":"The jacket is in good condition and last years fashion.",
+      "image":"res/Mens-Winter-Jacket.jpg",
+      "category":"cloth",
+      "email":"e@mail.de",
+        "urgency":"2",
+        "amount":"3"
+     },
+    {
+      "name":"Offering German lessons",
+      "categoryIcon":"res/books30.png",
+      "image":"res/keyboard-books.gif",
+      "lon":"13.359846",
+      "lat":"52.541833",
+      "details":"Retired German teacher can help people on all levels."
+     },
+    {
+      "name":"Bed to give away",
+      "categoryIcon":"res/beds2.png",
+      "image":"res/liegen01_bett.jpg",
+      "lon":"13.38587",
+      "lat":"52.52113",
+      "details":"The bed is in good condition and comes with a matress."
+      
+     }
+]
