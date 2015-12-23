@@ -49,6 +49,13 @@ try {
                 $parameters->_id = 0;
                 $parameters->lat = 1;
                 $parameters->lon = 1;
+            } elseif ($find->actionID == 'all') {
+                $parameters->_id = 0;
+                $parameters->lat = 1;
+                $parameters->lon = 1;
+                $parameters->title = 1;
+                $parameters->imageURL = 1;
+                $parameters->description = 1;
             }
             
             // connect to mongodb

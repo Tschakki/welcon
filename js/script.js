@@ -1,7 +1,7 @@
 	$(document).ready(function() {
 
         switch($(location).attr('pathname')){      
-          case "/welcon/start.php":
+          case "/welcon/index.php":
               initmap(function() {
             //Test um JSON-Objekt zu erstellen und anzusprechen
         /*var myJSONOffers = {"Offers": [
@@ -12,26 +12,59 @@
 };*/
              //Beginn der Slideshow
              if (document.getElementById("changeText")) {
-                 var elem = document.getElementById("changeText");
-        elem.innerHTML = 
-                '<div id="slideshow"><article><div id="summary"><ul><li> Title: ' + JsonPlots[2].title + '</li><li>Latitude: ' + JsonPlots[2].latitude + '</li><li>Longitude: ' + JsonPlots[2].longitude + '</li></ul></div>'
-            + '<div id="image"><img src="' + JsonPlots[2].image + '" class="imgSlide"></div></article></div>';
-        
-             //Beginn der Schleife zum Springen in der Slideshow
-                var counter = 0;
-                var elem = document.getElementById("changeText");
-                setInterval(function () {
-                    if (elem != null) {
-                    elem.innerHTML = 
-                        '<div id="slideshow"><article><div id="summary"><ul><li> Title: ' + JsonPlots[counter].name + '</li><li>Latitude: ' + JsonPlots[counter].lat + '</li><li>Longitude: ' + JsonPlots[counter].lon + '</li></ul></div>'
-                    + '<div id="image"><img src="' + JsonPlots[counter].image + '" class="imgSlide"></div></article></div>';
-                        //console.log("JsonPlots.length: " + JsonPlots.length);
-                    counter++;
-                    if(counter >= JsonPlots.length) { counter = 0; }
-                    }
-                }, 6000);
-             }
-              });
+                 
+                 var find = new Object();
+                find._id = "";
+                find.actionID = "all";
+
+                var promise = $.ajax({
+                    type: "POST",
+                    url: "db/read.php",
+                    data: {
+                        find: JSON.stringify(find),
+                    },
+                    success: function (data) {
+            console.log("ERFOLG!!");
+                        var response = $.parseJSON(data);
+                        if (response.status) {
+                            // set up the map
+                            var elem = document.getElementById("changeText");
+                            elem.innerHTML = 
+                        '<div id="slideshow"><article><div id="summary"><ul><li> Title: ' + response.data[0].title + '</li><li>Latitude: ' + response.data[0].lat + '</li><li>Longitude: ' + response.data[0].lon + '</li></ul></div>'
+                    + '<div id="image"><img src="' + response.data[0].imageURL + '" class="imgSlide"></div></article></div>';
+
+                     //Beginn der Schleife zum Springen in der Slideshow
+                            var counter = 0;
+                            var elem = document.getElementById("changeText");
+                            setInterval(function () {
+                                if (elem != null) {
+                                    elem.innerHTML = 
+                                '<div id="slideshow"><article><div id="summary"><ul><li> Title: ' + response.data[counter].title + '</li><li>Latitude: ' + response.data[counter].lat + '</li><li>Longitude: ' + response.data[counter].lon + '</li></ul></div>'
+                            + '<div id="image"><img src="' + response.data[counter].imageURL + '" class="imgSlide"></div></article></div>';
+                                //console.log("JsonPlots.length: " + JsonPlots.length);
+                                    counter++;
+                                    if(counter >= response.data.length) { counter = 0; }
+                                }
+                            }, 6000);
+                            $.notify({
+                                message: 'Lesen von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!'
+                            }, {
+                                type: 'success'
+                            });
+                            return response;
+                        //                     alert("true: "+response.data);
+                        } else {
+                        //                      alert("false: "+response.data);
+                            $.notify({
+                                message: 'Lesen von ' + localStorage.getItem('selectedEntry') + ' nicht erfolgreich!'
+                            }, {
+                                type: 'warning'
+                            });
+                        }
+                    },
+                });
+             } 
+            });
             break;
           case "/welcon/entryForm.php":
             showMap(function() { 

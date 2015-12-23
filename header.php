@@ -42,7 +42,7 @@
             <nav class="navbar-collapse collapse" role="navigation">
                 <ul class="nav navbar-nav">
                         <li>
-                            <a href="overview.php"><i class="fa fa-map-marker fa-2x"></i></a>
+                            <a href="index.php"><i class="fa fa-map-marker fa-2x"></i></a>
                         </li>
                         <li>
                             <a href="entryForm.php"><i class="fa fa-bullhorn fa-2x"></i></a>
