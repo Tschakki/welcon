@@ -1,7 +1,7 @@
 	$(document).ready(function() {
 
         switch($(location).attr('pathname')){      
-          case "/weco/start.php":
+          case "/welcon/start.php":
               initmap(function() {
             //Test um JSON-Objekt zu erstellen und anzusprechen
         /*var myJSONOffers = {"Offers": [
@@ -33,117 +33,11 @@
              }
               });
             break;
-          case "/weco/entryForm.php":
+          case "/welcon/entryForm.php":
             showMap(function() { 
             });
             break;
         }
-       
-        
-        		// validate signup form on keyup and submit
-		$("#editOffer").validate({
-            onkeyup: function(element) {$(element).valid()},
-            focusInvalid: true,
-			rules: {
-            chooseCategory: {
-                required: true,
-            },
-            title: {
-                required: true,
-                minlength: 2,
-                maxlength: 20
-            },
-            amount: {
-                required: true,
-                number: true,
-                min: 1,
-                max: 500
-                
-            },
-            latitude: {
-                required: true,
-                min: -180,
-                max: 180
-            },
-            longitude: {
-            required: true,
-            min: -180,
-            max: 180
-            },
-            description: {
-                required: true,
-                minlength: 2,
-                maxlength: 500
-            },
-            email: {
-                required: true,
-                email: true
-            }
-        },
-		messages: {
-			chooseCategory: {
-                required: "Please choose a category."
-            },
-            title: {
-                required: "Insert a title.",
-                minlength: "The minimal length of the title is 2 characters.",
-                maxlength: "The maximum length of the title is 20 characters."
-            },
-            amount: {
-                required: "Insert an amount.",
-                number: "Put the amount in numerals.",
-                min: "The minimum amount is 1.",
-                max: "The maximum amount is 500."
-                
-            },
-            latitude: {
-                required: "Please mark a location.",
-                min: "The numeral must be between -180 and 180.",
-                max: "The numeral must be between -180 and 180."
-            },
-            longitude: {
-                required: "Please mark a location.",
-                min: "The numeral must be between -180 and 180.",
-                max: "The numeral must be between -180 and 180."
-            },
-            description: {
-                required: "Please put a short description.",
-                minlength: "The minimal length of the description is 2 characters.",
-                maxlength: "The maximum length of the description is 20 characters."
-            },
-            email: {
-                required: "Please insert a mailadress.",
-                email: "Please insert a valid mailadress."
-            }
-		},
-        submitHandler: function(form) {
-            console.log("form: " + form);
-            // Fire off the request to /form.php
-            request = $.ajax({
-                            url: form.action,
-                            type: form.method,
-                            data: $(form).serialize(),
-                            success: function(data_response){
-            $("#output1").html(data_response);
-                            }
-            });
-
-            // Callback handler that will be called on success
-            request.done(function (response, textStatus, jqXHR){
-                // Log a message to the console
-                console.log("Hooray, it worked!");
-            });
-
-            // Callback handler that will be called on failure
-            request.fail(function (jqXHR, textStatus, errorThrown){
-                // Log the error to the console
-                console.error(
-                    "The following error occurred: "+
-                    textStatus, errorThrown
-                );
-            });
-        }
-    });    
     $("#editNeed").validate({
         onkeyup: function(element) {$(element).valid()},
         focusInvalid: true,
@@ -209,11 +103,15 @@
             }
         },
         submitHandler: function (form) {
-            ajaxCREATE(form)
+            setLocation(form, ajaxCREATE)
         }
     });
         
-
+        function setLocation(form, callback) {
+            $("#latitude").val(localStorage.getItem("lat"));
+            $("#longitude").val(localStorage.getItem("lon"));
+            callback(form);
+        }
         function ajaxCREATE  (form) {
        console.log("form: " + form);
         var postEntry = new Object();

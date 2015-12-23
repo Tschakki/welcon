@@ -46,37 +46,60 @@ function initmap(callback) {
 
 function showMap(callback) {
     //get all entries in db, to display their markers on te map
-    var entryArray;
-    entryArray = ajaxREAD("","location");
-//$.getJSON('data/dummy.json', function(response){
-    //JsonPlots = response;
-    JsonPlots = "";
-	
-        // set up the map
-        map = new L.Map('map');
+    var find = new Object();
+        find._id = "";
+        find.actionID = "location";
 
-        // create the tile layer with correct attribution
-        var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-        var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-        //var osm = new L.TileLayer(osmUrl, {minZoom: 1, maxZoom: 30, attribution: osmAttrib});		
-        L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
-            attribution: false,
-            minZoom: 1,
-            maxZoom: 17
-        }).addTo(map);
+        var promise = $.ajax({
+            type: "POST",
+            url: "db/read.php",
+            data: {
+                find: JSON.stringify(find),
+            },
+            success: function (data) {
+    console.log("ERFOLG!!");
+                var response = $.parseJSON(data);
+                if (response.status) {
+                // set up the map
+                map = new L.Map('map');
 
-        // start the map in Berlin
-        map.setView(new L.LatLng(52.52113, 13.38577),11);
-        //map.addLayer(osm);
-        //console.dir(JsonPlots);
- //stateChanged(JsonPlots);
-        map.on('moveend', onMapMove);
-        map.on('click', addMarker);
-    //statt jsonplots richtige eintrge aus DB anzeigen, sofern vorhanden
-        function onMapMove(e) { stateChanged(JsonPlots); }
-//});
-    setTimeout(callback, 500);
-    
+                // create the tile layer with correct attribution
+                var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+                var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+                //var osm = new L.TileLayer(osmUrl, {minZoom: 1, maxZoom: 30, attribution: osmAttrib});		
+                L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+                    attribution: false,
+                    minZoom: 1,
+                    maxZoom: 17
+                }).addTo(map);
+
+                // start the map in Berlin
+                map.setView(new L.LatLng(52.52113, 13.38577),11);
+                //map.addLayer(osm);
+                stateChanged(response.data);
+                function onMapMove(e) { stateChanged(response.data); }
+                map.on('moveend', onMapMove);
+                map.on('click', addMarker);
+            //statt jsonplots richtige eintrge aus DB anzeigen, sofern vorhanden
+                
+                setTimeout(callback, 500);
+                $.notify({
+                    message: 'Lesen von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!'
+                }, {
+                    type: 'success'
+                });
+                return response;
+                //                     alert("true: "+response.data);
+            } else {
+                //                      alert("false: "+response.data);
+                $.notify({
+                    message: 'Lesen von ' + localStorage.getItem('selectedEntry') + ' nicht erfolgreich!'
+                }, {
+                    type: 'warning'
+                });
+            }
+        },
+    });
 }
 
 function ajaxREAD (entryID, actionID) {
@@ -94,20 +117,22 @@ function ajaxREAD (entryID, actionID) {
             },
             success: function (data) {
     console.log("ERFOLG!!");
-                /*var response = $.parseJSON(data);*/
-                if (data.status) {
-                    swal({
+                
+                var response = $.parseJSON(data);
+                if (response.status) {
+                    /*swal({
                                 title: "Erfolg",
                                 text: 'Lesen von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!',
                                 type: "success"
                             }, function () {
                         location.reload();
-                    });
+                    });*/
                     $.notify({
                         message: 'Lesen von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!'
                     }, {
                         type: 'success'
                     });
+                    return response;
                     //                     alert("true: "+response.data);
                 } else {
                     //                      alert("false: "+response.data);
@@ -158,13 +183,13 @@ function addMarker(e){
     
 
 function stateChanged(plots) {
-    if (plots != null || plots != "" || plots == undefined) {
+    if (plots != null || plots != "" || plots != undefined) {
     var plotlist;
 	// if AJAX returned a list of markers, add them to the map
 	//if (ajaxRequest.readyState==4) {
 		//use the info here that was returned
 		//if (ajaxRequest.status==200) {
-    //console.dir(plots);
+    console.dir(plots);
 			plotlist=plots;
     //console.dir(plotlist);
 			removeMarkers();

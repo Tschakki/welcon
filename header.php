@@ -34,7 +34,7 @@
     <header class="top" role="header">
         <div class="container">
             <a href="#" class="navbar-brand pull-left">
-                BS3 TUTORIAL
+                WELCON
             </a>
             <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="glyphicon glyphicon-align-justify"></span>

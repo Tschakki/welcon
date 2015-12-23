@@ -46,7 +46,7 @@ try {
             $parameters->history = 0;
             // actionID = "location"
             } elseif ($find->actionID == 'location') {
-                $parameters->_id = 1;
+                $parameters->_id = 0;
                 $parameters->lat = 1;
                 $parameters->lon = 1;
             }
