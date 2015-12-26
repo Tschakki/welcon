@@ -1,18 +1,11 @@
-	$(document).ready(function() {
+$(document).ready(function() {
 
-        switch($(location).attr('pathname')){      
-          case "/welcon/index.php":
-              initmap(function() {
-            //Test um JSON-Objekt zu erstellen und anzusprechen
-        /*var myJSONOffers = {"Offers": [
-        {"title": "One winterjacket for free!", "latitude": "52.52113", "longitude": "13.38570", "image":"res/Mens-Winter-Jacket.jpg"},
-        {"title": "Offering German lessons", "latitude": "52.52123", "longitude": "13.38577", "image":"res/keyboard-books.gif"},
-        {"title": "Bed to give away", "latitude": "52.52113", "longitude": "13.38587", "image":"res/liegen01_bett.jpg"}
-    ]
-};*/
-             //Beginn der Slideshow
+    switch($(location).attr('pathname')){      
+      case "/welcon/index.php":
+        initmap(function() {
+         //Beginn der Slideshow
              if (document.getElementById("changeText")) {
-                 
+
                  var find = new Object();
                 find._id = "";
                 find.actionID = "all";
@@ -47,7 +40,7 @@
                                 }
                             }, 6000);
                             $.notify({
-                                message: 'Lesen von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!'
+                                message: 'Lesen von den Einträgen erfolgreich!'
                             }, {
                                 type: 'success'
                             });
@@ -64,123 +57,119 @@
                     },
                 });
              } 
-            });
-            break;
-          case "/welcon/entryForm.php":
-            showMap(function() { 
-            });
-            break;
-        }
-    $("#editNeed").validate({
-        onkeyup: function(element) {$(element).valid()},
-        focusInvalid: true,
-        /*definiert welche Felder Eingabe verlangen und welcher Art, diese Eingaben
-        sein müssen*/
-        rules: {
-            chooseCategory: {
-                required: true,
-            },
-            title: {
-                required: true,
-                minlength: 2,
-                maxlength: 20
-            },
-            latitude: {
-                required: true,
-                min: -180,
-                max: 180
-            },
-            longitude: {
-                required: true,
-                min: -180,
-                max: 180
-            },
-            description: {
-                required: true,
-                minlength: 2,
-                maxlength: 500
-            },
-            image: {
-                required: true
-            },
-            email: {
-                required: true,
-                email: true
-            }
-        },
-        /*Erstellt spezielle Fehlermeldungen für alle Felder.*/
-        messages: {
-            chooseCategory: {
-                required: "Please choose a category."
-            },
-            title: {
-                required: "Insert a title.",
-                minlength: "The minimal length of the title is 2 characters.",
-                maxlength: "The maximum length of the title is 20 characters."
-            },
-            latitude: {
-                required: "Please mark a location.",
-                min: "The numeral must be between -180 and 180.",
-                max: "The numeral must be between -180 and 180."
-            },
-            longitude: {
-                required: "Please mark a location.",
-                min: "The numeral must be between -180 and 180.",
-                max: "The numeral must be between -180 and 180."
-            },
-            description: {
-                required: "Please put a description.",
-                minlength: "The minimal length of the description is 2 characters.",
-                maxlength: "The maximum length of the description is 20 characters."
-            },
-            image: {
-                required: "Please upload an image"
-            },
-            email: {
-                required: "Please insert a mailadress.",
-                email: "Please insert a valid mailadress."
-            }
-        },
-        submitHandler: function (form) {
-            setLocation(form, ajaxCREATE)
-        }
-    });
-        
-        $("#imageUpload").submit(function (event) {
-
-            //disable the default form submission
-            event.preventDefault();
-            //grab all form data  
-            //var formData = $(this).serialize();
-            $.ajax({
-                url: 'db/upload.php',
-                type: 'POST',
-                data: new FormData( this ),
-                async: false,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    
-                    alert('Form Submitted!');
-                    var response = $.parseJSON(data);
-                    //console.dir(response);
-                    $("#image").val(response.data);
-                },
-                error: function(){
-                    alert("error in ajax form submission");
-                }
-            });
         });
-        function setLocation(form, callback) {
-            $("#latitude").val(localStorage.getItem("lat"));
-            $("#longitude").val(localStorage.getItem("lon"));
-            callback(form);
+        break;
+      case "/welcon/entryForm.php":
+        showMap(function() { 
+        });
+        break;
+    }
+    $("#editNeed").validate({
+    onkeyup: function(element) {$(element).valid()},
+    focusInvalid: true,
+    /*definiert welche Felder Eingabe verlangen und welcher Art, diese Eingaben
+    sein müssen*/
+    rules: {
+        chooseCategory: {
+            required: true,
+        },
+        title: {
+            required: true,
+            minlength: 2,
+            maxlength: 20
+        },
+        latitude: {
+            required: true,
+            min: -180,
+            max: 180
+        },
+        longitude: {
+            required: true,
+            min: -180,
+            max: 180
+        },
+        description: {
+            required: true,
+            minlength: 2,
+            maxlength: 500
+        },
+        image: {
+            required: true
+        },
+        email: {
+            required: true,
+            email: true
         }
-        function ajaxCREATE  (form) {
+    },
+    /*Erstellt spezielle Fehlermeldungen für alle Felder.*/
+    messages: {
+        chooseCategory: {
+            required: "Please choose a category."
+        },
+        title: {
+            required: "Insert a title.",
+            minlength: "The minimal length of the title is 2 characters.",
+            maxlength: "The maximum length of the title is 20 characters."
+        },
+        latitude: {
+            required: "Please mark a location.",
+            min: "The numeral must be between -180 and 180.",
+            max: "The numeral must be between -180 and 180."
+        },
+        longitude: {
+            required: "Please mark a location.",
+            min: "The numeral must be between -180 and 180.",
+            max: "The numeral must be between -180 and 180."
+        },
+        description: {
+            required: "Please put a description.",
+            minlength: "The minimal length of the description is 2 characters.",
+            maxlength: "The maximum length of the description is 20 characters."
+        },
+        image: {
+            required: "Please upload an image"
+        },
+        email: {
+            required: "Please insert a mailadress.",
+            email: "Please insert a valid mailadress."
+        }
+    },
+    submitHandler: function (form) {
+        setLocation(form, ajaxCREATE)
+    }
+});
+    $("#imageUpload").submit(function (event) {
+
+        //disable the default form submission
+        event.preventDefault();
+        $.ajax({
+            url: 'db/upload.php',
+            type: 'POST',
+            data: new FormData( this ),
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+
+                alert('Form Submitted!');
+                var response = $.parseJSON(data);
+                $("#image").val(response.data);
+            },
+            error: function(){
+                alert("error in ajax form submission");
+            }
+        });
+    });
+    function setLocation(form, callback) {
+        $("#latitude").val(localStorage.getItem("lat"));
+        $("#longitude").val(localStorage.getItem("lon"));
+        callback(form);
+    }
+    function ajaxCREATE  (form) {
        console.log("form: " + form);
         var postEntry = new Object();
-
+        localStorage.setItem("selectedEntry", $("#title").val());
         postEntry.kind = $("#chooseKind").val();
         postEntry.title = $("#title").val();
         postEntry.category = $("#chooseCategory").val();
@@ -199,68 +188,16 @@
                 postEntry: JSON.stringify(postEntry),
             },
             success: function (data) {
-    console.log("ERFOLG!!");
-                /*var response = $.parseJSON(data);*/
-                if (data.status) {
-                    swal({
-                                title: "Erfolg",
-                                text: 'Speichern von von ' + localStorage.getItem('selectedGlossarId') + ' erfolgreich!',
-                                type: "success"
-                            }, function () {
-                        location.reload();
-                    });
+    var response = $.parseJSON(data);
+                if (response.status) {
                     $.notify({
-                        message: 'Speichern von von ' + localStorage.getItem('selectedGlossarId') + ' erfolgreich!'
+                        message: 'Speichern von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!'
                     }, {
                         type: 'success'
                     });
-                    //                     alert("true: "+response.data);
                 } else {
-                    //                      alert("false: "+response.data);
                     $.notify({
-                        message: 'Speichern von von ' + localStorage.getItem('selectedGlossarId') + ' nicht erfolgreich!'
-                    }, {
-                        type: 'warning'
-                    });
-                }
-            },
-        });
-    }
-        
-        function ajaxREAD (entryID, actionID) {
-        localStorage.setItem("selectedEntry", entryID);
-        console.log("entryID: " + entryID);
-        var find = new Object();
-        find._id = entryID;
-        find.action = actionID;
-
-        var promise = $.ajax({
-            type: "POST",
-            url: "db/read.php",
-            data: {
-                postEntry: JSON.stringify(find),
-            },
-            success: function (data) {
-    console.log("ERFOLG!!");
-                /*var response = $.parseJSON(data);*/
-                if (data.status) {
-                    swal({
-                                title: "Erfolg",
-                                text: 'Speichern von von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!',
-                                type: "success"
-                            }, function () {
-                        location.reload();
-                    });
-                    $.notify({
-                        message: 'Speichern von von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!'
-                    }, {
-                        type: 'success'
-                    });
-                    //                     alert("true: "+response.data);
-                } else {
-                    //                      alert("false: "+response.data);
-                    $.notify({
-                        message: 'Speichern von von ' + localStorage.getItem('selectedEntry') + ' nicht erfolgreich!'
+                        message: 'Speichern von ' + localStorage.getItem('selectedEntry') + ' nicht erfolgreich!'
                     }, {
                         type: 'warning'
                     });
@@ -269,54 +206,3 @@
         });
     }
 });
-
-
-/*$("#ask").click(function(){
-    window.location.href = "ask.php";
-});
-             
-$("#offer").click(function(){
-    window.location.href = "offer.php";
-});
-
-$(document).on("click", "#overview", function () {
-    $("#content").clear;
-    $("#content").load("overview.html");
-});
-$(document).on("click", "#ask", function () {
-    $("#content").clear;
-    $("#content").load("ask.html");
-});*/
-/*$(document).on("click", ".editOffer", function() {
-    console.log("blub");
-   $("#theForm").ajaxSubmit({url: 'editOffer.php', type: 'post'});
-});*/
-/*$(document).on("click", ".editOffer", function() {
-    window.location.href = "editOffer.php";
-});
-$(document).on("click", ".editNeed", function() {
-    window.location.href = "editNeed.php";
-});
-$(document).on("click", ".delete", function() {
-    window.confirm("Do you really want to delete the entry?");
-});
-$(document).on("click", ".showNeed", function() {
-    window.location.href = "showNeed.php";
-});
-$(document).on("click", ".showOffer", function() {
-    window.location.href = "showOffer.php";
-});
-$(document).on("click", ".saveNeed", function() {
-    window.confirm("Ihre Anfrage wurde gespeichert.");
-});
-$(document).on("click", ".saveOffer", function() {
-    
-    window.confirm("Ihr Angebot wurde gespeichert.");
-});
-
-
-
-
-         });
-        
-        */

@@ -51,16 +51,10 @@
     <input type="email" name="email" id="email" class="form" size="25" ></input>
     </p>
     <p><label class="frontLable"></label>
-        <!--<input name="submitButton" type="submit">
-        <img src="res/save8.png" class="save form">
-        </input>-->
         <button type="submit">
         <img src="res/save8.png" class="save"/>
         </button>
     </p>
-    
-    <!--<label><br><br><span class="save" id="overview"><a href="overview.php"><manIcons class="fa fa-floppy-o fa-2x saveNeed"></i>
-</i></a></span></label>-->
 </fieldset>
 </form>
 <form id="imageUpload" action="upload.php" method="post" enctype="multipart/form-data">

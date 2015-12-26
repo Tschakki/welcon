@@ -1,5 +1,4 @@
 var map;
-//var ajaxRequest;
 var plotlayers=[];
 localStorage.setItem("markerSet","false");
 function initmap(callback) {
@@ -39,14 +38,12 @@ function initmap(callback) {
                 //map.on('click', addMarker);
                 setTimeout(callback, 500);
                  $.notify({
-                    message: 'Lesen von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!'
+                    message: 'Lesen von den Einträgen erfolgreich!'
                 }, {
                     type: 'success'
                 });
                 return response;
-                //                     alert("true: "+response.data);
             } else {
-                //                      alert("false: "+response.data);
                 $.notify({
                     message: 'Lesen von ' + localStorage.getItem('selectedEntry') + ' nicht erfolgreich!'
                 }, {
@@ -93,18 +90,14 @@ function showMap(callback) {
                 function onMapMove(e) { stateChanged(response.data); }
                 map.on('moveend', onMapMove);
                 map.on('click', addMarker);
-            //statt jsonplots richtige eintrge aus DB anzeigen, sofern vorhanden
-                
                 setTimeout(callback, 500);
                 $.notify({
-                    message: 'Lesen von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!'
+                    message: 'Lesen von den Eiträgen erfolgreich!'
                 }, {
                     type: 'success'
                 });
                 return response;
-                //                     alert("true: "+response.data);
             } else {
-                //                      alert("false: "+response.data);
                 $.notify({
                     message: 'Lesen von ' + localStorage.getItem('selectedEntry') + ' nicht erfolgreich!'
                 }, {
@@ -114,50 +107,6 @@ function showMap(callback) {
         },
     });
 }
-
-function ajaxREAD (entryID, actionID) {
-        localStorage.setItem("selectedEntry", entryID);
-        console.log("entryID: " + entryID);
-        var find = new Object();
-        find._id = entryID;
-        find.actionID = actionID;
-
-        var promise = $.ajax({
-            type: "POST",
-            url: "db/read.php",
-            data: {
-                find: JSON.stringify(find),
-            },
-            success: function (data) {
-    console.log("ERFOLG!!");
-                
-                var response = $.parseJSON(data);
-                if (response.status) {
-                    /*swal({
-                                title: "Erfolg",
-                                text: 'Lesen von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!',
-                                type: "success"
-                            }, function () {
-                        location.reload();
-                    });*/
-                    $.notify({
-                        message: 'Lesen von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!'
-                    }, {
-                        type: 'success'
-                    });
-                    return response;
-                    //                     alert("true: "+response.data);
-                } else {
-                    //                      alert("false: "+response.data);
-                    $.notify({
-                        message: 'Lesen von ' + localStorage.getItem('selectedEntry') + ' nicht erfolgreich!'
-                    }, {
-                        type: 'warning'
-                    });
-                }
-            },
-        });
-    }
 var newMarker;
 function addMarker(e){
     if (localStorage.getItem("markerSet") == "false") {
@@ -174,15 +123,6 @@ function addMarker(e){
             alert(position);
             marker.setLatLng([position],{id:uni,draggable:'true'}).bindPopup(position).update();
     });*/
-
-        var newEntry = {
-                 "name": "new marker",
-                 "lon": e.latlng.lng.toString(),
-                 "lat": e.latlng.lat.toString(),
-                 "details": "the details",
-                 image: "res/dog.jpg"
-             }
-        //JsonPlots.push(newEntry);
     } else {
         var lat = (e.latlng.lat);
         var lng = (e.latlng.lng);
@@ -197,23 +137,17 @@ function addMarker(e){
 function stateChanged(plots) {
     if (plots != null || plots != "" || plots != undefined) {
     var plotlist;
-	// if AJAX returned a list of markers, add them to the map
-	//if (ajaxRequest.readyState==4) {
-		//use the info here that was returned
-		//if (ajaxRequest.status==200) {
-			plotlist=plots;
-			removeMarkers();
-			for (i=0;i<plotlist.length;i++) {
-				var plotll = new L.LatLng(plotlist[i].lat,plotlist[i].lon, true);
-				var plotmark = new L.Marker(plotll);
-                //brauchen wir die folgende zeile?
-				plotmark.data=plotlist[i];
-				map.addLayer(plotmark);
-				plotmark.bindPopup("<h3>"+plotlist[i].name+"</h3>"+plotlist[i].details);
-				plotlayers.push(plotmark);
-			}
-	//	}
-	//}
+        plotlist=plots;
+        removeMarkers();
+        for (i=0;i<plotlist.length;i++) {
+            var plotll = new L.LatLng(plotlist[i].lat,plotlist[i].lon, true);
+            var plotmark = new L.Marker(plotll);
+            //brauchen wir die folgende zeile?
+            plotmark.data=plotlist[i];
+            map.addLayer(plotmark);
+            plotmark.bindPopup("<h3>"+plotlist[i].name+"</h3>"+plotlist[i].details);
+            plotlayers.push(plotmark);
+        }
     }
 }
 

@@ -80,7 +80,7 @@ try {
                     "status"   => array(
                         "code" => 200,
                         "msg"  => "success,insert success"),
-                    "data"     => NULL
+                    "data"     => "true"
                 );
                 echo json_encode($status);
                 die;
