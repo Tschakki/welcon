@@ -1,7 +1,7 @@
 <?php include_once("header.php") ?>
 <section id="submitForm">
     <br>
-<h1Body>what do you need?</h1Body>
+<h1Body>what do you announce?</h1Body>
     <br>
 <form id="editNeed" lass="form" action="db/create.php" method="post" novalidate="novalidate">
     <fieldset>
@@ -43,6 +43,10 @@
     <input type="name" name="name" id="name" class="form" size="25" ></input>
     </p>
     <p>
+    <label class="frontLable" for="image"></label>
+    <input type="hidden" name="image" id="image" class="form"></input>
+    </p>
+    <p>
     <label class="frontLable" for="email">Contact Email:</label>
     <input type="email" name="email" id="email" class="form" size="25" ></input>
     </p>
@@ -59,7 +63,11 @@
 </i></a></span></label>-->
 </fieldset>
 </form>
-
+<form id="imageUpload" action="upload.php" method="post" enctype="multipart/form-data">
+    Select image to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="submit" value="Upload Image" name="submit">
+</form>
 </section>
 <section id="output1"></section>
 <?php include_once("footer.php") ?>

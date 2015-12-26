@@ -31,7 +31,7 @@
                             var elem = document.getElementById("changeText");
                             elem.innerHTML = 
                         '<div id="slideshow"><article><div id="summary"><ul><li> Title: ' + response.data[0].title + '</li><li>Latitude: ' + response.data[0].lat + '</li><li>Longitude: ' + response.data[0].lon + '</li></ul></div>'
-                    + '<div id="image"><img src="' + response.data[0].imageURL + '" class="imgSlide"></div></article></div>';
+                    + '<div id="image"><img src="uploads/' + response.data[0].imageURL + '" class="imgSlide"></div></article></div>';
 
                      //Beginn der Schleife zum Springen in der Slideshow
                             var counter = 0;
@@ -40,7 +40,7 @@
                                 if (elem != null) {
                                     elem.innerHTML = 
                                 '<div id="slideshow"><article><div id="summary"><ul><li> Title: ' + response.data[counter].title + '</li><li>Latitude: ' + response.data[counter].lat + '</li><li>Longitude: ' + response.data[counter].lon + '</li></ul></div>'
-                            + '<div id="image"><img src="' + response.data[counter].imageURL + '" class="imgSlide"></div></article></div>';
+                            + '<div id="image"><img src="uploads/' + response.data[counter].imageURL + '" class="imgSlide"></div></article></div>';
                                 //console.log("JsonPlots.length: " + JsonPlots.length);
                                     counter++;
                                     if(counter >= response.data.length) { counter = 0; }
@@ -100,6 +100,9 @@
                 minlength: 2,
                 maxlength: 500
             },
+            image: {
+                required: true
+            },
             email: {
                 required: true,
                 email: true
@@ -130,6 +133,9 @@
                 minlength: "The minimal length of the description is 2 characters.",
                 maxlength: "The maximum length of the description is 20 characters."
             },
+            image: {
+                required: "Please upload an image"
+            },
             email: {
                 required: "Please insert a mailadress.",
                 email: "Please insert a valid mailadress."
@@ -140,6 +146,32 @@
         }
     });
         
+        $("#imageUpload").submit(function (event) {
+
+            //disable the default form submission
+            event.preventDefault();
+            //grab all form data  
+            //var formData = $(this).serialize();
+            $.ajax({
+                url: 'db/upload.php',
+                type: 'POST',
+                data: new FormData( this ),
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    
+                    alert('Form Submitted!');
+                    var response = $.parseJSON(data);
+                    //console.dir(response);
+                    $("#image").val(response.data);
+                },
+                error: function(){
+                    alert("error in ajax form submission");
+                }
+            });
+        });
         function setLocation(form, callback) {
             $("#latitude").val(localStorage.getItem("lat"));
             $("#longitude").val(localStorage.getItem("lon"));
@@ -157,7 +189,7 @@
         postEntry.lat = $("#latitude").val();
         postEntry.lon = $("#longitude").val();
         postEntry.description = $("#description").val();
-        postEntry.imageURL = $("#imageURL").val();
+        postEntry.imageURL = $("#image").val();
         var successResponse;
 
         var promise = $.ajax({
