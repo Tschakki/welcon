@@ -42,7 +42,7 @@ input, select, textarea {
     margin-top: 1em;
 /*  display:inline;*/
 }
-#editNeed > fieldset > p > button {
+#addForm > p > button {
     text-align: center;
   float: left;
     margin-top: 1em;

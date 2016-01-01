@@ -65,6 +65,7 @@ $(document).ready(function() {
         break;
     }
     $("#editNeed").validate({
+        ignore: [],
     onkeyup: function(element) {$(element).valid()},
     focusInvalid: true,
     /*definiert welche Felder Eingabe verlangen und welcher Art, diese Eingaben
@@ -93,8 +94,8 @@ $(document).ready(function() {
             minlength: 2,
             maxlength: 500
         },
-        image: {
-            required: true
+        name: {
+            required: true   
         },
         email: {
             required: true,
@@ -126,8 +127,8 @@ $(document).ready(function() {
             minlength: "The minimal length of the description is 2 characters.",
             maxlength: "The maximum length of the description is 20 characters."
         },
-        image: {
-            required: "Please upload an image"
+        name: {
+            required: "Please tell your Name"
         },
         email: {
             required: "Please insert a mailadress.",
@@ -162,8 +163,8 @@ $(document).ready(function() {
         });
     });
     function setLocation(form, callback) {
-        $("#latitude").val(localStorage.getItem("lat"));
-        $("#longitude").val(localStorage.getItem("lon"));
+        localStorage.setItem("lat","");
+        localStorage.setItem("lon","");
         callback(form);
     }
     function ajaxCREATE  (form) {

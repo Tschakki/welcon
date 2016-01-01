@@ -116,7 +116,8 @@ function addMarker(e){
         localStorage.setItem("markerSet","true");
         localStorage.setItem("lon",e.latlng.lng.toString());
         localStorage.setItem("lat",e.latlng.lat.toString());
-        
+        $("#latitude").val(localStorage.getItem("lat"));
+        $("#longitude").val(localStorage.getItem("lon"));
 /*        marker.on('dragend', function(event){
             var marker = event.target;
             var position = marker.getLatLng();

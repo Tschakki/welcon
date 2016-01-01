@@ -3,18 +3,18 @@
     <br>
 <h1Body>what do you announce?</h1Body>
     <br>
-<form id="editNeed" lass="form" action="db/create.php" method="post" novalidate="novalidate">
-    <fieldset>
+    
+    <form id="editNeed" class="form" method="post" novalidate="novalidate">
     <p>
     <label class="frontLable" for="chooseKind">Do you offer or need?:</label>
-    <select name="chooseKind" id="chooseKind" class="form" required autofocus>
+    <select name="chooseKind" id="chooseKind" class="form" form="editNeed" required autofocus>
         <option value="offer">Offer</option>
         <option value="need">Need</option>
     </select>
     </p>
     <p>
     <label class="frontLable" for="chooseCategory">Choose:</label>
-    <select name="chooseCategory" id="chooseCategory" class="form" required autofocus multiple>
+    <select name="chooseCategory" id="chooseCategory" form="editNeed" class="form" required autofocus multiple>
         <option value="cloth">cloth</option>
         <option value="rooms">rooms</option>
         <option value="food">food</option>
@@ -27,41 +27,48 @@
     </p>
     <p>
     <label class="frontLable" for="title">Title:</label>
-    <input id="title" name="title" class="form" size="25" ></input>
+    <input id="title" name="title" class="form" form="editNeed" size="25" ></input>
     </p>
-    <p>
+<p>
     <label class="frontLable" for="description">Description:</label>
-    <textarea name="description" id="description" class="form" cols="75" rows="15"></textarea>
+    <textarea name="description" id="description" form="editNeed" class="form" cols="75" rows="15"></textarea>
     </p>
-    <p> <label class="frontLable" for="latitude">Location:</label>
+    <p> 
+        
+        <label class="frontLable" for="latitude">Location:</label>
+        
     <section id="map"></section>
-    <input id="latitude" type="hidden" name="latitude" class="form" placeholder="Latitude"  />
-    <input id="longitude" type="hidden" name="longitude" class="form"placeholder="Longitude"  />
+<input id="latitude" type="hidden" name="latitude" form="editNeed" class="form" placeholder="Latitude"  />
+    <input id="longitude" type="hidden" name="longitude" form="editNeed" class="form" placeholder="Longitude"  />
+    
     </p>
     <p>
     <label class="frontLable" for="name">Author:</label>
-    <input type="name" name="name" id="name" class="form" size="25" ></input>
+    <input type="name" name="name" id="name" form="editNeed" class="form" size="25" ></input>
     </p>
     <p>
     <label class="frontLable" for="image"></label>
-    <input type="hidden" name="image" id="image" class="form"></input>
+    <input type="hidden" name="image" id="image" form="editNeed" class="form"></input>
     </p>
     <p>
     <label class="frontLable" for="email">Contact Email:</label>
-    <input type="email" name="email" id="email" class="form" size="25" ></input>
+    <input type="email" name="email" id="email" form="editNeed" class="form" size="25" ></input>
     </p>
-    <p><label class="frontLable"></label>
-        <button type="submit">
+</form>
+<form id="imageUpload" class="form" method="post" action="upload.php"></form>
+    
+<div id="addForm">
+    
+ <label class="frontLable" for="selectImg">Select image to upload:</label>
+    <input type="file" name="fileToUpload" id="fileToUpload" form="imageUpload" >
+    <input type="submit" value="Upload Image" name="submit" form="imageUpload" >
+    
+    <p><label class="frontLable" for="submitbtn"></label>
+        <button type="submit" class="form" id="submitbtn" form="editNeed">
         <img src="res/save8.png" class="save"/>
         </button>
     </p>
-</fieldset>
-</form>
-<form id="imageUpload" action="upload.php" method="post" enctype="multipart/form-data">
-    Select image to upload:
-    <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type="submit" value="Upload Image" name="submit">
-</form>
+</div>
 </section>
 <section id="output1"></section>
 <?php include_once("footer.php") ?>
