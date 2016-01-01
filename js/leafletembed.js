@@ -114,8 +114,8 @@ function addMarker(e){
         // Add marker to map at click location; add popup window
         newMarker = new L.marker(e.latlng).addTo(map);
         localStorage.setItem("markerSet","true");
-        localStorage.setItem("lat",e.latlng.lng.toString());
-        localStorage.setItem("lon",e.latlng.lat.toString());
+        localStorage.setItem("lon",e.latlng.lng.toString());
+        localStorage.setItem("lat",e.latlng.lat.toString());
         
 /*        marker.on('dragend', function(event){
             var marker = event.target;
@@ -135,7 +135,7 @@ function addMarker(e){
     
 
 function stateChanged(plots) {
-    if (plots != null || plots != "" || plots != undefined) {
+    if (plots != null) {
     var plotlist;
         plotlist=plots;
         removeMarkers();
