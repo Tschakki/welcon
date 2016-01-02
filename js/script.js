@@ -152,10 +152,15 @@ $(document).ready(function() {
             contentType: false,
             processData: false,
             success: function (data) {
-
-                alert('Form Submitted!');
                 var response = $.parseJSON(data);
-                $("#image").val(response.data);
+                if (response.status.code == 200) {
+                    $("#uploadStatus").html('<h3><span class="glyphicon glyphicon-ok"></span></h3>');
+                    $("#image").val(response.data);
+                } else {
+                    $("#uploadStatus").html('<h3><span class="glyphicon glyphicon-remove"></span></h3>');
+                    $("#errorMsg").html('<span>' + response.status.msg + '</span>');
+                }
+                
             },
             error: function(){
                 alert("error in ajax form submission");

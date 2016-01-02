@@ -60,8 +60,17 @@
 <div id="addForm">
     
  <label class="frontLable" for="selectImg">Select image to upload:</label>
-    <input type="file" name="fileToUpload" id="fileToUpload" form="imageUpload" >
-    <input type="submit" value="Upload Image" name="submit" form="imageUpload" >
+    <div class="container">
+            <div class="col-md-4">
+                <input type="file" name="fileToUpload" id="fileToUpload" form="imageUpload" >
+                <input type="submit" value="Upload Image" name="submit" form="imageUpload" >
+            </div>
+            <div id="uploadStatus" class="col-md-4">
+            </div>
+            <div id="errorMsg" class="col-md-4">
+            </div>
+        </div>
+    
     
     <p><label class="frontLable" for="submitbtn"></label>
         <button type="submit" class="form" id="submitbtn" form="editNeed">
@@ -70,5 +79,4 @@
     </p>
 </div>
 </section>
-<section id="output1"></section>
 <?php include_once("footer.php") ?>
