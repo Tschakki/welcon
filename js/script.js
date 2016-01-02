@@ -155,6 +155,7 @@ $(document).ready(function() {
                 var response = $.parseJSON(data);
                 if (response.status.code == 200) {
                     $("#uploadStatus").html('<h3><span class="glyphicon glyphicon-ok"></span></h3>');
+                     $("#errorMsg").html('<span>' + response.status.msg + '</span>');
                     $("#image").val(response.data);
                 } else {
                     $("#uploadStatus").html('<h3><span class="glyphicon glyphicon-remove"></span></h3>');
