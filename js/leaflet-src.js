@@ -3418,6 +3418,20 @@ L.Icon.Default = L.Icon.extend({
 		return path + '/marker-' + name + '.png';
 	}
 });
+    
+var WelConIcon = L.Icon.extend({
+    options: {
+        shadowUrl: 'marker-shadow.png',
+        iconSize:     [38, 95],
+        shadowSize:   [50, 64],
+        iconAnchor:   [22, 94],
+        shadowAnchor: [4, 62],
+        popupAnchor:  [-3, -76]
+    }
+});
+    
+var offerIcon = new WelConIcon({iconUrl: 'marker-icon.png'}),
+    needIcon = new WelConIcon({iconUrl: 'marker-need.png'});
 
 L.Icon.Default.imagePath = (function () {
 	var scripts = document.getElementsByTagName('script'),
@@ -3446,6 +3460,7 @@ L.Marker = L.Class.extend({
 	includes: L.Mixin.Events,
 
 	options: {
+        if ( )
 		icon: new L.Icon.Default(),
 		title: '',
 		alt: '',
