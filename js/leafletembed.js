@@ -67,7 +67,6 @@ function showMap(callback) {
                 find: JSON.stringify(find),
             },
             success: function (data) {
-    console.log("ERFOLG!!");
                 var response = $.parseJSON(data);
                 if (response.status) {
                 // set up the map
@@ -146,7 +145,7 @@ function stateChanged(plots) {
             //brauchen wir die folgende zeile?
             plotmark.data=plotlist[i];
             map.addLayer(plotmark);
-            plotmark.bindPopup("<h3>"+plotlist[i].name+"</h3>"+plotlist[i].details);
+            plotmark.bindPopup("<h3>"+plotlist[i].title + "</h3>"+plotlist[i].description);
             plotlayers.push(plotmark);
         }
     }
