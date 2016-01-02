@@ -14,7 +14,7 @@
     </p>
     <p>
     <label class="frontLable" for="chooseCategory">Choose:</label>
-    <select name="chooseCategory" id="chooseCategory" form="editNeed" class="form" required autofocus multiple>
+    <select name="chooseCategory" id="chooseCategory" form="editNeed" class="form" required autofocus>
         <option value="cloth">cloth</option>
         <option value="rooms">rooms</option>
         <option value="food">food</option>

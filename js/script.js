@@ -27,12 +27,12 @@ $(document).ready(function() {
                     + '<div id="image"><img src="uploads/' + response.data[0].imageURL + '" class="imgSlide"></div></article></div>';
 
                      //Beginn der Schleife zum Springen in der Slideshow
-                            var counter = 0;
+                            var counter = 1;
                             var elem = document.getElementById("changeText");
                             setInterval(function () {
                                 if (elem != null) {
                                     elem.innerHTML = 
-                                '<div id="slideshow"><article><div id="summary"><ul><li> Title: ' + response.data[counter].title + '</li><li>Latitude: ' + response.data[counter].lat + '</li><li>Longitude: ' + response.data[counter].lon + '</li></ul></div>'
+                                '<div id="slideshow"><article><div id="summary"><ul><li> Title: ' + response.data[counter].title + '</li><li>Details: ' + response.data[counter].description + '</li></ul></div>'
                             + '<div id="image"><img src="uploads/' + response.data[counter].imageURL + '" class="imgSlide"></div></article></div>';
                                 //console.log("JsonPlots.length: " + JsonPlots.length);
                                     counter++;
