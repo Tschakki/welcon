@@ -106,6 +106,15 @@ try {
         echo json_encode($status);
         die;
     }
+    
+     $cursor = $collection->find();
+// iterate cursor to display title of documents
+   echo "Inhalt der Collection";
+	
+   foreach ($cursor as $document) {
+      echo $document["title"] . "\n";
+   }
+    
 } catch (Exception $ex) {
     $status = array(
         "status"   => array(
