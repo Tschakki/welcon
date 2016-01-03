@@ -1,6 +1,6 @@
 <?php include_once("header.php") ?>
 <section id="submitForm">
-<h1Body>Settings</h1Body>
+<h1>Settings</h1>
 <h3>Edit Offers</h3>
  <table>
      <tr>

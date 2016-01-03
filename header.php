@@ -5,14 +5,16 @@
     <!-- Set the viewport so this responsive site displays correctly on mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Include bootstrap CSS -->
+     <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
     <link href="includes/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="includes/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css" />
 	<link rel="stylesheet" href="css/leaflet.css" />
-    <link href='https://fonts.googleapis.com/css?family=Cinzel' rel='stylesheet' type='text/css'>
+   
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Welcome Connection</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+   
     
 	<!--<link rel="stylesheet" href="includes/resources/form.css" />-->
 	
