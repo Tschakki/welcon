@@ -63,6 +63,47 @@ $(document).ready(function() {
         showMap(function() { 
         });
         break;
+      case "/welcon/settings.php":
+            var find = new Object();
+                find._id = "";
+                find.actionID = "list";
+
+                var promise = $.ajax({
+                    type: "POST",
+                    url: "db/read.php",
+                    data: {
+                        find: JSON.stringify(find),
+                    },
+                    success: function (data) {
+           
+                        var response = $.parseJSON(data);
+                        var item2;
+                        if (response.status.code == 200) {
+                            for (var key in response.data) {
+                                if (response.data.hasOwnProperty(key)) {
+                            //for (i=0;i<response.data.length;i++){
+              //              response.forEach(function(item) {
+                                $("#listEntries").append('<div class="row"><div class="col-md-3"><h3>'  + response.data[key].title + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].description + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].name + '</h3></div><div class="col-md-3"><h3><span id="' + key + '" class="glyphicon glyphicon-eye-open"></span><span id="' + key + '" class="glyphicon glyphicon-edit"></span><span id="' + key + '" class="glyphicon glyphicon-trash"></span></h3></div></div>');
+                                }
+                            }
+                            $.notify({
+                                message: 'Lesen von den Einträgen erfolgreich!'
+                            }, {
+                                type: 'success'
+                            });
+                            return response;
+                        //                     alert("true: "+response.data);
+                        } else {
+                        //                      alert("false: "+response.data);
+                            $.notify({
+                                message: 'Lesen von ' + localStorage.getItem('selectedEntry') + ' nicht erfolgreich!'
+                            }, {
+                                type: 'warning'
+                            });
+                        }
+                    },
+                });
+        break;
     }
     $("#editNeed").validate({
         ignore: [],
