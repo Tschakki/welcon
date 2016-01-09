@@ -19,13 +19,13 @@ $(document).ready(function() {
                     success: function (data) {
             console.log("ERFOLG!!");
                         var response = $.parseJSON(data);
-                        if (response.status) {
+                        if (response.status.code == 200) {
                             // set up the map
                             var elem = document.getElementById("changeText");
                             elem.innerHTML = 
-                        '<div id="slideshow"><article><div id="summary"><ul><li> Title: ' + response.data[0].title + '</li><li>Latitude: ' + response.data[0].lat + '</li><li>Longitude: ' + response.data[0].lon + '</li></ul></div>'
+                        '<div id="slideshow"><article><div id="summary"><ul><li> Title: ' + response.data[0].title + '</li><li>Details: ' + response.data[0].description + '</li></ul></div>'
                     + '<div id="image"><img src="uploads/' + response.data[0].imageURL + '" class="imgSlide"></div></article></div>';
-
+                            console.log("image-url: " + response.data[0].imageURL);
                      //Beginn der Schleife zum Springen in der Slideshow
                             var counter = 1;
                             var elem = document.getElementById("changeText");

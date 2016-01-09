@@ -41,9 +41,9 @@ try {
  //           $find->_id = "";
 //var_dump($find);die;
            if ($find->actionID == 'all') {
-               console.log("ACTIONid AKK ERKANNT");
+              // console.log("ACTIONid AKK ERKANNT");
                 $parameters->_id = 0;
-                $parameters->history = 0;
+                $parameters->history = 1;
                 $parameters->lat = 1;
                 $parameters->lon = 1;
                 $parameters->title = 1;
