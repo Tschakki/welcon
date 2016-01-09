@@ -38,7 +38,7 @@ html {
     font-weight: 300;
 }
 .middle {
-    background-color: #CCC;
+    background-color: #f5f5f5;
     min-height: 100%;
 }
 .middle .container {
@@ -55,7 +55,7 @@ html {
     background-color: #373737;
 }
 .bottom {
-    background-color: #474747;
+    background-color: #373737;
 }
 .bottom .container {
     background-color: #373737;
