@@ -85,9 +85,13 @@ $(document).ready(function() {
                                     console.dir(response.data[key]);
                             //for (i=0;i<response.data.length;i++){
               //              response.forEach(function(item) {
-                                $("#listEntries").append('<div id="' + response.data[key]._id.$id + '" class="row"><div class="col-md-3"><h3>'  + response.data[key].title + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].description + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].name + '</h3></div><div class="col-md-3"><h3><span id="' + key + '" class="glyphicon glyphicon-eye-open"></span><span id="' + key + '" class="glyphicon glyphicon-edit"></span><span id="' + key + '" class="glyphicon glyphicon-trash"></span></h3></div></div>');
+                                $("#listEntries").append('<div id="' + key + '" class="row"><div class="col-md-3"><h3>'  + response.data[key].title + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].description + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].name + '</h3></div><div class="col-md-3"><h3><span id="' + key + '" class="glyphicon glyphicon-eye-open"></span><span id="' + key + '" class="glyphicon glyphicon-edit"></span><span class="glyphicon glyphicon-trash" onclick="ajaxDELETE();"></span></h3></div></div>');
+                                    
                                 }
                             }
+                      //  var container = document.getElementById("' + key + '").parentElement;
+                        console.log("ID vom Lösch-Button:" +  key);
+
                             $.notify({
                                 message: 'Lesen von den Einträgen erfolgreich!'
                             }, {
@@ -248,6 +252,45 @@ $(document).ready(function() {
                 } else {
                     $.notify({
                         message: 'Speichern von ' + localStorage.getItem('selectedEntry') + ' nicht erfolgreich!'
+                    }, {
+                        type: 'warning'
+                    });
+                }
+            },
+        });
+    }
+     function ajaxDELETE  () {
+       console.log("form: " + form);
+        var postEntry = new Object();
+        localStorage.setItem("selectedEntry", $("#title").val());
+        postEntry.kind = $("#chooseKind").val();
+        postEntry.title = $("#title").val();
+        postEntry.category = $("#chooseCategory").val();
+        postEntry.name = $("#name").val();
+        postEntry.email = $("#email").val();
+        postEntry.lat = $("#latitude").val();
+        postEntry.lon = $("#longitude").val();
+        postEntry.description = $("#description").val();
+        postEntry.imageURL = $("#image").val();
+        var successResponse;
+
+        var promise = $.ajax({
+            type: "DELETE",
+            url: "db/delete.php",
+            data: {
+                postEntry: JSON.stringify(postEntry),
+            },
+            success: function (data) {
+    var response = $.parseJSON(data);
+                if (response.status) {
+                    $.notify({
+                        message: 'Löschen von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!'
+                    }, {
+                        type: 'success'
+                    });
+                } else {
+                    $.notify({
+                        message: 'Löschen von ' + localStorage.getItem('selectedEntry') + ' nicht erfolgreich!'
                     }, {
                         type: 'warning'
                     });
