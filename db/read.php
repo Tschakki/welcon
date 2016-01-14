@@ -43,20 +43,17 @@ try {
            if ($find->actionID == 'all') {
               // console.log("ACTIONid AKK ERKANNT");
                 $parameters->_id = 0;
+
                 $parameters->history = 1;
                 $parameters->lat = 1;
                 $parameters->lon = 1;
                 $parameters->title = 1;
                 $parameters->imageURL = 1;
                 $parameters->description = 1;
+
             // actionID = "location"
             } elseif ($find->actionID == 'location') {
                 $parameters->_id = 0;
-                $parameters->lat = 1;
-                $parameters->lon = 1;
-                $parameters->title = 1;
-                $parameters->imageURL = 1;
-                $parameters->description = 1;
             } elseif ($find->actionID == 'list') {
                 $parameters->_id = 1;
                 $parameters->title = 1;
@@ -67,9 +64,11 @@ try {
             
             // connect to mongodb
             $m = new MongoClient();
+            
             // select a database
             $d = "weco";
             $db = $m->$d;
+
             // select a collection
             $c = "entry";
             $collection = $db->$c;
@@ -77,6 +76,7 @@ try {
             // convert $query from stdObject to an arrayObject
            // $find = stdObject_to_arrayObject($find);
            // $parameters = stdObject_to_arrayObject($parameters);
+     
             
             // database query
             $cursor = $collection->find($find2, $parameters);
