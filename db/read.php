@@ -44,21 +44,12 @@ try {
               // console.log("ACTIONid AKK ERKANNT");
                 $parameters->_id = 0;
                 $parameters->history = 0;
-                $parameters->lat = 1;
-                $parameters->lon = 1;
-                $parameters->title = 1;
-                $parameters->imageURL = 1;
-                $parameters->description = 1;
-
-            // actionID = "location"
+               // actionID = "location"
             } elseif ($find->actionID == 'location') {
                 $parameters->_id = 0;
             } elseif ($find->actionID == 'list') {
                 $parameters->_id = 1;
                 $parameters->title = 1;
-                $parameters->description = 1;
-                $parameters->name = 1;
-                $parameters->email = 1;
             }
             
             // connect to mongodb
