@@ -79,11 +79,13 @@ $(document).ready(function() {
                         var response = $.parseJSON(data);
                         var item2;
                         if (response.status.code == 200) {
+                            
                             for (var key in response.data) {
                                 if (response.data.hasOwnProperty(key)) {
+                                    console.dir(response.data[key]);
                             //for (i=0;i<response.data.length;i++){
               //              response.forEach(function(item) {
-                                $("#listEntries").append('<div class="row"><div class="col-md-3"><h3>'  + response.data[key].title + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].description + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].name + '</h3></div><div class="col-md-3"><h3><span id="' + key + '" class="glyphicon glyphicon-eye-open"></span><span id="' + key + '" class="glyphicon glyphicon-edit"></span><span id="' + key + '" class="glyphicon glyphicon-trash"></span></h3></div></div>');
+                                $("#listEntries").append('<div id="' + response.data[key]._id.$id + '" class="row"><div class="col-md-3"><h3>'  + response.data[key].title + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].description + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].name + '</h3></div><div class="col-md-3"><h3><span id="' + key + '" class="glyphicon glyphicon-eye-open"></span><span id="' + key + '" class="glyphicon glyphicon-edit"></span><span id="' + key + '" class="glyphicon glyphicon-trash"></span></h3></div></div>');
                                 }
                             }
                             $.notify({
