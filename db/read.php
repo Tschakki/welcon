@@ -50,6 +50,9 @@ try {
             } elseif ($find->actionID == 'list') {
                 $parameters->_id = 1;
                 $parameters->title = 1;
+                $parameters->description = 1;
+                $parameters->name = 1;
+                $parameters->email = 1;
             }
             
             // connect to mongodb
