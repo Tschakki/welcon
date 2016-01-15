@@ -82,15 +82,20 @@ $(document).ready(function() {
                             
                             for (var key in response.data) {
                                 if (response.data.hasOwnProperty(key)) {
+                                    console.dir("hihI"); 
                                     console.dir(response.data[key]);
                             //for (i=0;i<response.data.length;i++){
               //              response.forEach(function(item) {
-                                $("#listEntries").append('<div id="' + key + '" class="row"><div class="col-md-3"><h3>'  + response.data[key].title + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].description + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].name + '</h3></div><div class="col-md-3"><h3><span id="' + key + '" class="glyphicon glyphicon-eye-open"></span><span id="' + key + '" class="glyphicon glyphicon-edit"></span><span class="glyphicon glyphicon-trash" onclick="ajaxDELETE();"></span></h3></div></div>');
+                                $("#listEntries").append('<div id="' + key + '" class="row"><div class="col-md-3"><h3>'  + response.data[key].title + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].description + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].name + '</h3></div><div class="col-md-3"><h3><span id="' + key + '" class="glyphicon glyphicon-eye-open"></span><span id="' + key + '" class="glyphicon glyphicon-edit"></span><span id="deleteButton" class="glyphicon glyphicon-trash" onclick="ajaxDELETE();" method="post" ></span></h3></div></div>');
                                     
+                
                                 }
+                                
                             }
-                      //  var container = document.getElementById("' + key + '").parentElement;
-                        console.log("ID vom Lösch-Button:" +  key);
+                            
+                        var container = document.getElementById(key).parentNode;
+                            console.log("container: " + container);
+                        console.log("ID vom Lösch-Button: " +  key);
 
                             $.notify({
                                 message: 'Lesen von den Einträgen erfolgreich!'
@@ -106,9 +111,13 @@ $(document).ready(function() {
                             }, {
                                 type: 'warning'
                             });
+                            
                         }
+                        
                     },
+                    
                 });
+            
         break;
     }
     $("#editNeed").validate({
@@ -259,29 +268,28 @@ $(document).ready(function() {
             },
         });
     }
-     function ajaxDELETE  () {
+    
+});
+ function ajaxDELETE (form) {
        console.log("form: " + form);
         var postEntry = new Object();
         localStorage.setItem("selectedEntry", $("#title").val());
-        postEntry.kind = $("#chooseKind").val();
-        postEntry.title = $("#title").val();
-        postEntry.category = $("#chooseCategory").val();
-        postEntry.name = $("#name").val();
-        postEntry.email = $("#email").val();
-        postEntry.lat = $("#latitude").val();
-        postEntry.lon = $("#longitude").val();
-        postEntry.description = $("#description").val();
-        postEntry.imageURL = $("#image").val();
+        postEntry._id = $(document.getElementById("deleteButton").parentNode.parentNode);
         var successResponse;
-
+        console.log("Ich bin grad hier in der nähe am werkeln, zeile 284");
+     
         var promise = $.ajax({
-            type: "DELETE",
+            type: "POST",
             url: "db/delete.php",
             data: {
-                postEntry: JSON.stringify(postEntry),
+                
+            id: $(this).getElementById("deleteButton").parentNode.parentNode,
             },
             success: function (data) {
+                console.log("In data steckt: " + data);
+               console.log ("vor dem parseJSON, dass Fehler wirft."); 
     var response = $.parseJSON(data);
+               
                 if (response.status) {
                     $.notify({
                         message: 'Löschen von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!'
@@ -298,4 +306,3 @@ $(document).ready(function() {
             },
         });
     }
-});
