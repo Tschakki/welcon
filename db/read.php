@@ -35,7 +35,7 @@ try {
             die;
         } else {
             $parameters = new stdClass();
-            $find2 = new stdClass();
+            $find2 = array();
             // make $find an object
             $find = json_decode($_POST['find']);
  //           $find->_id = "";
@@ -47,6 +47,15 @@ try {
                // actionID = "location"
             } elseif ($find->actionID == 'location') {
                 $parameters->_id = 0;
+            } elseif ($find->actionID == 'one') {
+                // THIS is how you find something by MongoId
+                $realmongoid = new MongoId($find->_id);
+                // Pass the actual instance of the MongoId object to the query
+                $find2 = array('_id' => $realmongoid);
+                $parameters->_id = 0;
+              //$find2->_id = 'ObjectId("' . $find->_id . '")';
+               //$find2 = $find->_id;
+              
             } elseif ($find->actionID == 'list') {
                 $parameters->_id = 1;
                 $parameters->title = 1;
