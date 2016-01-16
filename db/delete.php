@@ -18,7 +18,7 @@ try {
    // echo "<p>huhu</p>";
     // check $_POST
     if (!empty($_POST)) {
-        echo "<p>huhu</p>";
+        echo "<p>echo</p>";
         if (!isset($_POST['find'])) {
             $status = array(
                 "status"   => array(
@@ -111,6 +111,6 @@ try {
         die;
     }
 // return
-echo "<p>huhu</p>";
+echo "<p>vor json_encode</p>";
 echo json_encode($status);
 

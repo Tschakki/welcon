@@ -82,11 +82,11 @@ $(document).ready(function() {
                             
                             for (var key in response.data) {
                                 if (response.data.hasOwnProperty(key)) {
-                                    console.dir("hihI"); 
+                                    console.dir("bevor mit read liste zusammengesetzt wird"); 
                                     console.dir(response.data[key]);
                             //for (i=0;i<response.data.length;i++){
               //              response.forEach(function(item) {
-                                $("#listEntries").append('<div id="' + key + '" class="row"><div class="col-md-3"><h3>'  + response.data[key].title + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].description + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].name + '</h3></div><div class="col-md-3"><h3><span id="' + key + '" class="glyphicon glyphicon-eye-open"></span><span id="' + key + '" class="glyphicon glyphicon-edit"></span><span id="deleteButton" class="glyphicon glyphicon-trash" onclick="ajaxDELETE();" method="post" ></span></h3></div></div>');
+                                $("#listEntries").append('<div id="' + key + '" class="row"><div class="col-md-3"><h3>'  + response.data[key].title + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].description + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].name + '</h3></div><div class="col-md-3"><h3><span id="' + key + '" class="glyphicon glyphicon-eye-open"></span><span id="' + key + '" class="glyphicon glyphicon-edit"></span><span id="deleteButton" class="glyphicon glyphicon-trash" onclick="ajaxDELETE(this);" method="post" ></span></h3></div></div>');
                                     
                 
                                 }
@@ -270,20 +270,21 @@ $(document).ready(function() {
     }
     
 });
- function ajaxDELETE (form) {
-       console.log("form: " + form);
+ function ajaxDELETE (sender) {
+      // console.log("form: " + form);
         var postEntry = new Object();
         localStorage.setItem("selectedEntry", $("#title").val());
+     var tr = sender.parentNode.parentNode;
         postEntry._id = $(document.getElementById("deleteButton").parentNode.parentNode);
         var successResponse;
         console.log("Ich bin grad hier in der nähe am werkeln, zeile 284");
+     console.log("in Postentry: " + postEntry._id);
      
+        
         var promise = $.ajax({
             type: "POST",
             url: "db/delete.php",
-            data: {
-                
-            id: $(this).getElementById("deleteButton").parentNode.parentNode,
+            data: { id_of_div: $('#span div').html()
             },
             success: function (data) {
                 console.log("In data steckt: " + data);
