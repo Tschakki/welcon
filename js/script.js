@@ -86,9 +86,17 @@ $(document).ready(function() {
                                    // console.dir(response.data[key]);
                             //for (i=0;i<response.data.length;i++){
               //              response.forEach(function(item) {
-                                $("#listEntries").append('<div id="' + response.data[key]._id.$id + '" class="row"><div class="col-md-3"><h3>'  + response.data[key].title + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].description + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].name + '</h3></div><div class="col-md-3"><h3><span id="' + key + '" class="glyphicon glyphicon-eye-open"></span><span id="' + key + '" class="glyphicon glyphicon-edit"></span><span id="' + key + '" class="glyphicon glyphicon-trash"></span></h3></div></div>');
+                                $("#listEntries").append('<div id="' + key + '" class="row"><div class="col-md-3"><h3>'  + response.data[key].title + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].description + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].name + '</h3></div><div class="col-md-3"><h3><span id="' + key + '" class="glyphicon glyphicon-eye-open"></span><span id="' + key + '" class="glyphicon glyphicon-edit"></span><span id="deleteButton" class="glyphicon glyphicon-trash" onclick="ajaxDELETE(this);" method="post" ></span></h3></div></div>');
+                                    
+                
                                 }
+                                
                             }
+                            
+                        var container = document.getElementById(key).parentNode;
+                            console.log("container: " + container);
+                        console.log("ID vom Lösch-Button: " +  key);
+
                             $.notify({
                                 message: 'Lesen von den Einträgen erfolgreich!'
                             }, {
@@ -103,9 +111,13 @@ $(document).ready(function() {
                             }, {
                                 type: 'warning'
                             });
+                            
                         }
+                        
                     },
+                    
                 });
+            
         break;
       case "/welcon/entry.php":
             var find = new Object();
@@ -312,8 +324,41 @@ $(document).ready(function() {
             },
         });
     }
-    
-    function ajaxREAD (form) {
-        
-    }
 });
+ function ajaxDELETE (sender) {
+      // console.log("form: " + form);
+        var postEntry = new Object();
+        localStorage.setItem("selectedEntry", $("#title").val());
+     var tr = sender.parentNode.parentNode;
+        postEntry._id = $(document.getElementById("deleteButton").parentNode.parentNode);
+        var successResponse;
+        console.log("Ich bin grad hier in der nähe am werkeln, zeile 284");
+     console.log("in Postentry: " + postEntry._id);
+     
+        
+        var promise = $.ajax({
+            type: "POST",
+            url: "db/delete.php",
+            data: { id_of_div: $('#span div').html()
+            },
+            success: function (data) {
+                console.log("In data steckt: " + data);
+               console.log ("vor dem parseJSON, dass Fehler wirft."); 
+    var response = $.parseJSON(data);
+               
+                if (response.status) {
+                    $.notify({
+                        message: 'Löschen von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!'
+                    }, {
+                        type: 'success'
+                    });
+                } else {
+                    $.notify({
+                        message: 'Löschen von ' + localStorage.getItem('selectedEntry') + ' nicht erfolgreich!'
+                    }, {
+                        type: 'warning'
+                    });
+                }
+            },
+        });
+    }
