@@ -86,7 +86,7 @@ $(document).ready(function() {
                                    // console.dir(response.data[key]);
                             //for (i=0;i<response.data.length;i++){
               //              response.forEach(function(item) {
-                                $("#listEntries").append('<div id="' + key + '" class="row"><div class="col-md-3"><h3>'  + response.data[key].title + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].description + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].name + '</h3></div><div class="col-md-3"><h3><span id="' + key + '" class="glyphicon glyphicon-eye-open"></span><span id="' + key + '" class="glyphicon glyphicon-edit"></span><span id="deleteButton" class="glyphicon glyphicon-trash" onclick="ajaxDELETE(this);" method="post" ></span></h3></div></div>');
+                                $("#listEntries").append('<div id="' + key + '" class="row"><div class="col-md-3"><h3>'  + response.data[key].title + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].description + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].name + '</h3></div><div class="col-md-3"><h3><span id="' + key + '" class="glyphicon glyphicon-eye-open"></span><span id="' + key + '" class="glyphicon glyphicon-edit"></span><span id="deleteButton" class="glyphicon glyphicon-trash"></span></h3></div></div>');
                                     
                 
                                 }
@@ -250,6 +250,42 @@ $(document).ready(function() {
            // console.dir(parDIV);
           }
         });*/
+    }); 
+    $(document).on("click", ".glyphicon-trash", function() {
+        alert("Bist du dir sicher?");
+        var parDIV = $(this).parent().parent().parent();
+        localStorage.setItem("id", parDIV[0].id);
+        var find = new Object();
+                find._id = localStorage.getItem('id');
+                find.actionID = "one";
+
+                var promise = $.ajax({
+                    type: "POST",
+                    url: "db/delete.php",
+                    data: {
+                        find: JSON.stringify(find),
+                    },
+                    success: function (data) {
+            console.log("ERFOLG!!");
+                        var response = $.parseJSON(data);
+                        
+                        console.dir(response);
+                        if (response.status.code == 200) {
+                            
+                    $.notify({
+                        message: 'Löschen von ' + localStorage.getItem('id') + ' erfolgreich!'
+                    }, {
+                        type: 'success'
+                    });
+                } else {
+                    $.notify({
+                        message: 'Löschen von ' + localStorage.getItem('id') + ' nicht erfolgreich!'
+                    }, {
+                        type: 'warning'
+                    });
+                }
+            },
+        });
     });
     $("#imageUpload").submit(function (event) {
 
