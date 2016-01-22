@@ -60,6 +60,7 @@ html {
 .bottom .container {
     background-color: #373737;
     min-height: 150px;
+    padding: 0;
 }
 .bottom .container h3 {
     color: #999;
