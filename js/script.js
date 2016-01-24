@@ -136,7 +136,7 @@ $(document).ready(function() {
                         if (response.status.code == 200) {
                             console.dir(response);
                             $("#pic").html('<img src="uploads/' + response.data[0].imageURL + '">');
-                            $("#details").html('<div><h3>' + response.data[0].title + '</h3><p>' + response.data[0].description + '</p></div>">');
+                            $("#details").html('<div><h3>' + response.data[0].title + '</h3><p>' + response.data[0].description + '</p></div>');
                     $.notify({
                         message: 'Lesen von ' + localStorage.getItem('id') + ' erfolgreich!'
                     }, {
@@ -401,7 +401,7 @@ function ajaxUPDATE  (form) {
             },
         });
     }
-});
+;
  function ajaxDELETE (sender) {
       // console.log("form: " + form);
         var postEntry = new Object();
