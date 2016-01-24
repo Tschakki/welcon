@@ -11,9 +11,11 @@ html {
 }
 .top {
     background-color: #474747;
+    min-height: 8%;
 }
 .top .navbar-brand {
-    height: 50px;
+ /*   height: 50px;*/
+    
     line-height: 50px;
     text-align: center;
     padding: 0 10px;
@@ -39,7 +41,7 @@ html {
 }
 .middle {
     background-color: #f5f5f5;
-    min-height: 100%;
+    min-height: 80%;
 }
 .middle .container {
     background-color: #f5f5f5;
@@ -56,10 +58,12 @@ html {
 }
 .bottom {
     background-color: #373737;
+    min-height: 12%;
 }
 .bottom .container {
     background-color: #373737;
-    min-height: 150px;
+    /*min-height: 150px;*/
+    
     padding: 0;
 }
 .bottom .container h3 {
