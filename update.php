@@ -3,7 +3,7 @@
     <br>
 <h1Body>Edit this entry</h1Body>
     <br>
-    
+    <input type="hidden" id="id"></input>
     <form id="editNeed" class="form" method="post" novalidate="novalidate">
     <p>
     <label class="frontLable" for="chooseKind">Do you offer or need?:</label>
