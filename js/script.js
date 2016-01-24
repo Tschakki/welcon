@@ -165,9 +165,12 @@ $(document).ready(function() {
                     },
                     success: function (data) {
             console.log("ERFOLG!!");
+                        
                         var response = $.parseJSON(data);
                         if (response.status.code == 200) {
                             console.dir(response);
+                           
+                         
                             
                     $.notify({
                         message: 'Lesen von ' + localStorage.getItem('id') + ' erfolgreich!'
@@ -419,7 +422,7 @@ function ajaxUPDATE  (form) {
        console.log("form: " + form);
         var postEntry = new Object();
         localStorage.setItem("selectedEntry", $("#id").val());
-        /*postEntry._id = $("#id").val();*/
+        postEntry._id = $("#id").val();
         postEntry.kind = $("#chooseKind").val();
         postEntry.title = $("#title").val();
         postEntry.category = $("#chooseCategory").val();
