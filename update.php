@@ -3,56 +3,54 @@
     <br>
 <h1Body>Edit this entry</h1Body>
     <br>
-    <input type="hidden" id="id"></input>
-    <form id="editNeed" class="form" method="post" novalidate="novalidate">
+    
+    <form id="updateEntry" class="form" method="post" novalidate="novalidate">
     <p>
-    <label class="frontLable" for="chooseKind">Do you offer or need?:</label>
-    <select name="chooseKind" id="chooseKind" class="form" form="editNeed" required autofocus>
-        <option value="offer">Offer</option>
-        <option value="need">Need</option>
-    </select>
+        <input type="hidden" id="id" />
+        <label class="frontLable" for="chooseKind">Do you offer or need?:</label>
+        <select name="chooseKind" id="chooseKind" class="form" form="updateEntry" required autofocus>
+            <option value="offer">Offer</option>
+            <option value="need">Need</option>
+        </select>
     </p>
     <p>
-    <label class="frontLable" for="chooseCategory">Choose:</label>
-    <select name="chooseCategory" id="chooseCategory" form="editNeed" class="form" required autofocus>
-        <option value="cloth">cloth</option>
-        <option value="rooms">rooms</option>
-        <option value="food">food</option>
-        <option value="furniture">furniture</option>
-        <option value="books">books</option>
-        <option value="information">information</option>
-        <option value="contact">contact</option>
-        <option value="other">something else</option>
-    </select>
+        <label class="frontLable" for="chooseCategory">Choose:</label>
+        <select name="chooseCategory" id="chooseCategory" form="updateEntry" class="form" required autofocus>
+            <option value="cloth">cloth</option>
+            <option value="rooms">rooms</option>
+            <option value="food">food</option>
+            <option value="furniture">furniture</option>
+            <option value="books">books</option>
+            <option value="information">information</option>
+            <option value="contact">contact</option>
+            <option value="other">something else</option>
+        </select>
     </p>
     <p>
-    <label class="frontLable" for="title">Title:</label>
-    <input id="title" name="title" class="form" form="editNeed" size="25" ></input>
+        <label class="frontLable" for="title">Title:</label>
+        <input id="title" name="title" class="form" form="updateEntry" size="25" />
     </p>
-<p>
-    <label class="frontLable" for="description">Description:</label>
-    <textarea name="description" id="description" form="editNeed" class="form" cols="75" rows="15"></textarea>
+    <p>
+        <label class="frontLable" for="description">Description:</label>
+        <textarea name="description" id="description" form="updateEntry" class="form" cols="75" rows="15"></textarea>
     </p>
     <p> 
-        
         <label class="frontLable" for="latitude">Location:</label>
-        
-    <section id="map"></section>
-<input id="latitude" type="hidden" name="latitude" form="editNeed" class="form" placeholder="Latitude"  />
-    <input id="longitude" type="hidden" name="longitude" form="editNeed" class="form" placeholder="Longitude"  />
-    
+        <section id="map"></section>
+        <input id="latitude" type="hidden" name="latitude" form="updateEntry" class="form" placeholder="Latitude"  />
+        <input id="longitude" type="hidden" name="longitude" form="updateEntry" class="form" placeholder="Longitude"  />
     </p>
     <p>
-    <label class="frontLable" for="name">Author:</label>
-    <input type="name" name="name" id="name" form="editNeed" class="form" size="25" ></input>
+        <label class="frontLable" for="name">Author:</label>
+        <input type="name" name="name" id="name" form="updateEntry" class="form" size="25" ></input>
     </p>
     <p>
-    <label class="frontLable" for="image"></label>
-    <input type="hidden" name="image" id="image" form="editNeed" class="form"></input>
+        <label class="frontLable" for="image"></label>
+        <input type="hidden" name="image" id="image" form="updateEntry" class="form"></input>
     </p>
     <p>
-    <label class="frontLable" for="email">Contact Email:</label>
-    <input type="email" name="email" id="email" form="editNeed" class="form" size="25" ></input>
+        <label class="frontLable" for="email">Contact Email:</label>
+        <input type="email" name="email" id="email" form="updateEntry" class="form" size="25" ></input>
     </p>
 </form>
 <form id="imageUpload" class="form" method="post" action="upload.php"></form>
@@ -73,7 +71,7 @@
     
     
     <p><label class="frontLable" for="submitbtn"></label>
-        <button type="submit" class="form" id="submitbtn" form="editNeed">
+        <button type="submit" class="form" id="submitbtn" form="updateEntry">
         <img src="res/save8.png" class="save"/>
         </button>
     </p>

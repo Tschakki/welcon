@@ -153,6 +153,7 @@ $(document).ready(function() {
         });
             
          case "/welcon/update.php":
+            showMap(function() { 
             var find = new Object();
                 find._id = localStorage.getItem("id");
                 find.actionID = "one";
@@ -186,7 +187,7 @@ $(document).ready(function() {
                 }
             },
         });    
-            
+            });
         break;
     }
     
@@ -264,6 +265,81 @@ $(document).ready(function() {
     },
     submitHandler: function (form) {
         setLocation(form, ajaxCREATE)
+    }
+});
+    $("#updateEntry").validate({
+        ignore: [],
+    onkeyup: function(element) {$(element).valid()},
+    focusInvalid: true,
+    /*definiert welche Felder Eingabe verlangen und welcher Art, diese Eingaben
+    sein müssen*/
+    rules: {
+        chooseCategory: {
+            required: true,
+        },
+        title: {
+            required: true,
+            minlength: 2,
+            maxlength: 20
+        },
+        latitude: {
+            required: true,
+            min: -180,
+            max: 180
+        },
+        longitude: {
+            required: true,
+            min: -180,
+            max: 180
+        },
+        description: {
+            required: true,
+            minlength: 2,
+            maxlength: 500
+        },
+        name: {
+            required: true   
+        },
+        email: {
+            required: true,
+            email: true
+        }
+    },
+    /*Erstellt spezielle Fehlermeldungen für alle Felder.*/
+    messages: {
+        chooseCategory: {
+            required: "Please choose a category."
+        },
+        title: {
+            required: "Insert a title.",
+            minlength: "The minimal length of the title is 2 characters.",
+            maxlength: "The maximum length of the title is 20 characters."
+        },
+        latitude: {
+            required: "Please mark a location.",
+            min: "The numeral must be between -180 and 180.",
+            max: "The numeral must be between -180 and 180."
+        },
+        longitude: {
+            required: "Please mark a location.",
+            min: "The numeral must be between -180 and 180.",
+            max: "The numeral must be between -180 and 180."
+        },
+        description: {
+            required: "Please put a description.",
+            minlength: "The minimal length of the description is 2 characters.",
+            maxlength: "The maximum length of the description is 20 characters."
+        },
+        name: {
+            required: "Please tell your Name"
+        },
+        email: {
+            required: "Please insert a mailadress.",
+            email: "Please insert a valid mailadress."
+        }
+    },
+    submitHandler: function (form) {
+        setLocation(form, ajaxUPDATE)
     }
 });
     $(document).on("click", ".glyphicon-eye-open", function() {
