@@ -151,6 +151,39 @@ $(document).ready(function() {
                 }
             },
         });
+            
+         case "/welcon/update.php":
+            var find = new Object();
+                find._id = localStorage.getItem("id");
+                find.actionID = "one";
+
+                var promise = $.ajax({
+                    type: "POST",
+                    url: "db/read.php",
+                    data: {
+                        find: JSON.stringify(find),
+                    },
+                    success: function (data) {
+            console.log("ERFOLG!!");
+                        var response = $.parseJSON(data);
+                        if (response.status.code == 200) {
+                            console.dir(response);
+                            
+                    $.notify({
+                        message: 'Lesen von ' + localStorage.getItem('id') + ' erfolgreich!'
+                    }, {
+                        type: 'success'
+                    });
+                } else {
+                    $.notify({
+                        message: 'Lesen von ' + localStorage.getItem('id') + ' nicht erfolgreich!'
+                    }, {
+                        type: 'warning'
+                    });
+                }
+            },
+        });    
+            
         break;
     }
     
@@ -237,6 +270,27 @@ $(document).ready(function() {
         paket = '{ "id": "' + parDIV[0].id + '"}';
         paket = $.parseJSON(paket);*/
         window.location.href = "entry.php";
+        //;
+        /*$.ajax({
+          type: "GET",
+          url: "entry.php",
+          data: paket,
+          cache: false,
+          success: function(data){
+             // window.location.href = "entry.php";
+             //$("#resultarea").text(data);
+            console.log("id paket " + localStorage.getItem("id"));
+           // console.dir(parDIV);
+          }
+        });*/
+    }); 
+    $(document).on("click", ".glyphicon-edit", function() {
+        var parDIV = $(this).parent().parent().parent();
+        localStorage.setItem("id", parDIV[0].id);
+        /*var paket = []
+        paket = '{ "id": "' + parDIV[0].id + '"}';
+        paket = $.parseJSON(paket);*/
+        window.location.href = "update.php";
         //;
         /*$.ajax({
           type: "GET",
@@ -364,8 +418,8 @@ $(document).ready(function() {
 function ajaxUPDATE  (form) {
        console.log("form: " + form);
         var postEntry = new Object();
-        localStorage.setItem("selectedEntry", $("#title").val());
-        postEntry._id = $("#id").val();
+        localStorage.setItem("selectedEntry", $("#id").val());
+        /*postEntry._id = $("#id").val();*/
         postEntry.kind = $("#chooseKind").val();
         postEntry.title = $("#title").val();
         postEntry.category = $("#chooseCategory").val();
