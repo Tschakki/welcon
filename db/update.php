@@ -56,23 +56,30 @@ try {
             $c = "entry";
             $collection = $db->$c;
             // set $query
-            $query                  = new stdClass();
-            $query->kind            = $postEntry->kind;
-            $query->title           = $postEntry->title;
-            $query->category        = $postEntry->category;
-            $query->name            = $postEntry->name;
-            $query->email           = $postEntry->email;
-            $query->lat             = $postEntry->lat;
-            $query->lon             = $postEntry->lon;
-            $query->description     = $postEntry->description;
-            $query->imageURL        = $postEntry->imageURL;
-            $query->timestamp       = $gmtTime;
-            $history                = clone $query;
-            $history->action        = 'create';
-    //        $query->_id             = $postObject->glossarID;
-            $query->history         = new stdClass();
-            $query->history         = (object)array($history);
-    
+            // set $addToSet
+            $addToSet             = new stdClass();
+            $addToSet->timestamp  = $gmtTime;
+            $query                = new stdClass();
+            $set                  = new stdClass();
+            $set->kind            = $postEntry->kind;
+            $set->title           = $postEntry->title;
+            $set->category        = $postEntry->category;
+            $set->name            = $postEntry->name;
+            $set->email           = $postEntry->email;
+            $set->lat             = $postEntry->lat;
+            $set->lon             = $postEntry->lon;
+            $set->description     = $postEntry->description;
+            $set->imageURL        = $postEntry->imageURL;
+            $set->timestamp       = $gmtTime;
+            $history              = clone $set;
+     //       $history->action      = 'update';
+    //        $query->_id         = $postObject->glossarID;
+            $addToSet             = new stdClass();
+            $addToSet             = (object)array($history);
+            $query = new stdClass();
+            $query->{'$set'} = $set;
+            $query->{'$addToSet'} = new stdClass();
+            $query->{'$addToSet'}->history = $addToSet;
             // convert $query from stdObject to an arrayObject
             $query = stdObject_to_arrayObject($query);
     //var_dump($query);die;
