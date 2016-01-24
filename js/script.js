@@ -361,6 +361,47 @@ $(document).ready(function() {
         });
     }
 });
+function ajaxUPDATE  (form) {
+       console.log("form: " + form);
+        var postEntry = new Object();
+        localStorage.setItem("selectedEntry", $("#title").val());
+        postEntry._id = $("#id").val();
+        postEntry.kind = $("#chooseKind").val();
+        postEntry.title = $("#title").val();
+        postEntry.category = $("#chooseCategory").val();
+        postEntry.name = $("#name").val();
+        postEntry.email = $("#email").val();
+        postEntry.lat = $("#latitude").val();
+        postEntry.lon = $("#longitude").val();
+        postEntry.description = $("#description").val();
+        postEntry.imageURL = $("#image").val();
+        var successResponse;
+
+        var promise = $.ajax({
+            type: "POST",
+            url: "db/update.php",
+            data: {
+                postEntry: JSON.stringify(postEntry),
+            },
+            success: function (data) {
+    var response = $.parseJSON(data);
+                if (response.status) {
+                    $.notify({
+                        message: 'Bearbeiten von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!'
+                    }, {
+                        type: 'success'
+                    });
+                } else {
+                    $.notify({
+                        message: 'Bearbeiten von ' + localStorage.getItem('selectedEntry') + ' nicht erfolgreich!'
+                    }, {
+                        type: 'warning'
+                    });
+                }
+            },
+        });
+    }
+});
  function ajaxDELETE (sender) {
       // console.log("form: " + form);
         var postEntry = new Object();

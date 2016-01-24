@@ -43,6 +43,10 @@ try {
             $gmtTime = gmdate('d.m.Y H:i:s', $mongoTimestamp->sec);
             // make $postEntry an object
             $postEntry = json_decode($_POST['postEntry']);
+            $realmongoid = new MongoId($postEntry->_id);
+                // Pass the actual instance of the MongoId object to the query
+            $find = array('_id' => $realmongoid);
+            
             // connect to mongodb
             $m = new MongoClient();
             // select a database
@@ -53,7 +57,6 @@ try {
             $collection = $db->$c;
             // set $query
             $query                  = new stdClass();
-            $query->_id             = $postEntry->_id;
             $query->kind            = $postEntry->kind;
             $query->title           = $postEntry->title;
             $query->category        = $postEntry->category;
@@ -74,13 +77,13 @@ try {
             $query = stdObject_to_arrayObject($query);
     //var_dump($query);die;
             // database query
-            $cursor = $collection->insert($query);
+            $cursor = $collection->update($find,$query);
             // return result of database query
             if ($cursor["ok"] == 1) {
                 $status = array(
                     "status"   => array(
                         "code" => 200,
-                        "msg"  => "success,insert success"),
+                        "msg"  => "success,update success"),
                     "data"     => "true"
                 );
                 echo json_encode($status);
@@ -89,7 +92,7 @@ try {
                 $status = array(
                     "status"   => array(
                         "code" => 409,
-                        "msg"  => "danger,insert failed"),
+                        "msg"  => "danger,update failed"),
                     "data"     => NULL
                 );
                 echo json_encode($status);
