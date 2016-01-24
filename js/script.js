@@ -405,7 +405,9 @@ $(document).ready(function() {
         });*/
     }); 
     $(document).on("click", ".glyphicon-trash", function() {
-        alert("Bist du dir sicher?");
+        if (confirm('Are you sure you want to delete this entry from the database?')) {
+            // delete it!
+        
         var parDIV = $(this).parent().parent().parent();
         localStorage.setItem("id", parDIV[0].id);
         var find = new Object();
@@ -424,7 +426,7 @@ $(document).ready(function() {
                         
                         console.dir(response);
                         if (response.status.code == 200) {
-                            
+                        window.location.reload();      
                     $.notify({
                         message: 'Löschen von ' + localStorage.getItem('id') + ' erfolgreich!'
                     }, {
@@ -439,6 +441,9 @@ $(document).ready(function() {
                 }
             },
         });
+            } else {
+            // Do nothing!
+        }
     });
     $("#imageUpload").submit(function (event) {
 
