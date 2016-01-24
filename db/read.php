@@ -52,7 +52,7 @@ try {
                 $realmongoid = new MongoId($find->_id);
                 // Pass the actual instance of the MongoId object to the query
                 $find2 = array('_id' => $realmongoid);
-                $parameters->_id = 0;
+                //$parameters->_id = 0;
               //$find2->_id = 'ObjectId("' . $find->_id . '")';
                //$find2 = $find->_id;
               
