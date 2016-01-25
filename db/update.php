@@ -62,14 +62,15 @@ try {
             $query                = new stdClass();
             $set                  = new stdClass();
             $set->kind            = $postEntry->kind;
-            $set->title           = $postEntry->title;
             $set->category        = $postEntry->category;
-            $set->name            = $postEntry->name;
-            $set->email           = $postEntry->email;
+            $set->title           = $postEntry->title;
+            $set->description     = $postEntry->description;
             $set->lat             = $postEntry->lat;
             $set->lon             = $postEntry->lon;
-            $set->description     = $postEntry->description;
+            $set->name            = $postEntry->name;
             $set->imageURL        = $postEntry->imageURL;
+            $set->email           = $postEntry->email;
+            
             $set->timestamp       = $gmtTime;
             $history              = clone $set;
      //       $history->action      = 'update';

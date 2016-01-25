@@ -171,7 +171,7 @@ $(document).ready(function() {
                         var response = $.parseJSON(data);
                         if (response.status.code == 200) {
                             console.dir(response);
-                           
+                           lookdeep(response.data);
                          
                             
                     $.notify({
@@ -191,6 +191,32 @@ $(document).ready(function() {
             });
         break;
     }
+    
+    var index = 0;
+function lookdeep(object, conti) {
+    if (conti) {
+        var elements = conti;
+    } else {
+        var elements = document.getElementById("updateEntry");
+    }
+    var next, item;
+    for (item in object) {
+        if (object.hasOwnProperty(item)) {
+            next = object[item];
+            if (typeof next == 'object' && next != null) {
+                lookdeep(next);
+            } else {
+                while (elements.elements[index].type != "text" && elements.elements[index].type != "hidden" && elements.elements[index].type != "select-one" && elements.elements[index].type != "textarea" && elements.elements[index].type != "email") {
+                    index = index + 1;
+                }
+                if (elements.elements[index].type == "text" || elements.elements[index].type == "hidden" || elements.elements[index].type == "select-one" || elements.elements[index].type == "textarea" || elements.elements[index].type == "email") {
+                    elements.elements[index].value = String(next);
+                    index = index + 1;
+                }
+            }
+        }
+    }
+}
     
 
     $("#editNeed").validate({

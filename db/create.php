@@ -54,14 +54,15 @@ try {
             // set $query
             $query                  = new stdClass();
             $query->kind            = $postEntry->kind;
-            $query->title           = $postEntry->title;
             $query->category        = $postEntry->category;
-            $query->name            = $postEntry->name;
-            $query->email           = $postEntry->email;
+            $query->title           = $postEntry->title;
+            $query->description     = $postEntry->description;
             $query->lat             = $postEntry->lat;
             $query->lon             = $postEntry->lon;
-            $query->description     = $postEntry->description;
+            $query->name            = $postEntry->name;
             $query->imageURL        = $postEntry->imageURL;
+            $query->email           = $postEntry->email;
+            
             $query->timestamp       = $gmtTime;
             $history                = clone $query;
             $history->action        = 'create';
