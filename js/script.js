@@ -574,7 +574,7 @@ function ajaxUPDATE  (form) {
             },
             success: function (data) {
     var response = $.parseJSON(data);
-                if (response.status) {
+                if (response.status["code"] == 200) {
                     $.notify({
                         message: 'Bearbeiten von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!'
                     }, {
@@ -584,7 +584,7 @@ function ajaxUPDATE  (form) {
                     $.notify({
                         message: 'Bearbeiten von ' + localStorage.getItem('selectedEntry') + ' nicht erfolgreich!'
                     }, {
-                        type: 'warning'
+                        type: 'danger'
                     });
                 }
             },
