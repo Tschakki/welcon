@@ -106,6 +106,59 @@ function showMap(callback) {
         },
     });
 }
+function showMarker(lat,lon,callback) {
+    //get all entries in db, to display their markers on te map
+    var find = new Object();
+    find._id = "";
+    find.actionID = "location";
+    var promise = $.ajax({
+        type: "POST",
+        url: "db/read.php",
+        data: {
+            find: JSON.stringify(find),
+        },
+        success: function (data) {
+            var response = $.parseJSON(data);
+            if (response.status) {
+                //remove previous loaded map
+               // map.remove();
+                // set up the map
+                map = new L.Map('map');
+
+                // create the tile layer with correct attribution
+                var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+                var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+                //var osm = new L.TileLayer(osmUrl, {minZoom: 1, maxZoom: 30, attribution: osmAttrib});		
+                L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+                    attribution: false,
+                    minZoom: 1,
+                    maxZoom: 17
+                }).addTo(map);
+
+                // start the map in Berlin
+                map.setView(new L.LatLng(lat, lon),11);
+                //map.addLayer(osm);
+                stateChanged(response.data);
+                function onMapMove(e) { stateChanged(response.data); }
+                map.on('moveend', onMapMove);
+               // map.on('click', addMarker);
+                setTimeout(callback, 500);
+                $.notify({
+                    message: 'Lesen von den Einträgen erfolgreich!'
+                }, {
+                    type: 'success'
+                });
+                return response;
+            } else {
+                $.notify({
+                    message: 'Lesen von den Einträgen nicht erfolgreich!'
+                }, {
+                    type: 'warning'
+                });
+            }
+        },
+    });
+}
 var newMarker;
 function addMarker(e){
     if (localStorage.getItem("markerSet") == "false") {

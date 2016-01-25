@@ -138,6 +138,10 @@ $(document).ready(function() {
                             console.dir(response);
                             $("#pic").html('<img src="uploads/' + response.data[Object.keys(response.data)[0]].imageURL + '">');
                             $("#details").html('<div><h3>' + response.data[Object.keys(response.data)[0]].title + '</h3><p>' + response.data[Object.keys(response.data)[0]].description + '</p></div>');
+                            //$("#marker").html('<div><div id="map"></div></div>');
+                            $("#message").html('<div><button id="messagebtn" class="btn-primary">send message</button></div>');
+                            showMarker(response.data[Object.keys(response.data)[0]].lat,response.data[Object.keys(response.data)[0]].lon,function(){});
+                            
                     $.notify({
                         message: 'Lesen von ' + localStorage.getItem('id') + ' erfolgreich!'
                     }, {
@@ -152,8 +156,33 @@ $(document).ready(function() {
                 }
             },
         });
-            
+            break;
          case "/welcon/update.php":
+            var index = 0;
+            function lookdeep(object, conti) {
+                if (conti) {
+                    var elements = conti;
+                } else {
+                    var elements = document.getElementById("updateEntry");
+                }
+                var next, item;
+                for (item in object) {
+                    if (object.hasOwnProperty(item)) {
+                        next = object[item];
+                        if (typeof next == 'object' && next != null) {
+                            lookdeep(next);
+                        } else {
+                            while (elements.elements[index].type != "text" && elements.elements[index].type != "hidden" && elements.elements[index].type != "select-one" && elements.elements[index].type != "textarea" && elements.elements[index].type != "email") {
+                                index = index + 1;
+                            }
+                            if (elements.elements[index].type == "text" || elements.elements[index].type == "hidden" || elements.elements[index].type == "select-one" || elements.elements[index].type == "textarea" || elements.elements[index].type == "email") {
+                                elements.elements[index].value = String(next);
+                                index = index + 1;
+                            }
+                        }
+                    }
+                }
+            }
             showMap(function() { 
             var find = new Object();
                 find._id = localStorage.getItem("id");
@@ -192,31 +221,7 @@ $(document).ready(function() {
         break;
     }
     
-    var index = 0;
-function lookdeep(object, conti) {
-    if (conti) {
-        var elements = conti;
-    } else {
-        var elements = document.getElementById("updateEntry");
-    }
-    var next, item;
-    for (item in object) {
-        if (object.hasOwnProperty(item)) {
-            next = object[item];
-            if (typeof next == 'object' && next != null) {
-                lookdeep(next);
-            } else {
-                while (elements.elements[index].type != "text" && elements.elements[index].type != "hidden" && elements.elements[index].type != "select-one" && elements.elements[index].type != "textarea" && elements.elements[index].type != "email") {
-                    index = index + 1;
-                }
-                if (elements.elements[index].type == "text" || elements.elements[index].type == "hidden" || elements.elements[index].type == "select-one" || elements.elements[index].type == "textarea" || elements.elements[index].type == "email") {
-                    elements.elements[index].value = String(next);
-                    index = index + 1;
-                }
-            }
-        }
-    }
-}
+    
     
 
     $("#editNeed").validate({
