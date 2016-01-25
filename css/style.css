@@ -107,8 +107,8 @@ option {
 }
 #searchForm {
     float: right;
-    /*margin-top: 1.5em;
-    margin-right: 1em;*/
+    margin-top: 2vh;
+    margin-right: 1vh;
    
 }
 .glyphicon {
@@ -116,17 +116,20 @@ option {
         
 }
 .search {
-                padding:8px 40px;
-                background: #eeeeff;/*rgba(50, 50, 50, 0.2);*/
+    padding:8px 40px;
+    
+    background: #eeeeff;/*rgba(50, 50, 50, 0.2);*/
 }
-.searchButton {
+/*.searchButton {
                 cursor: pointer;
                 padding:8px 30px;
-                border:2px solid #154caa;
+                border:2px solid #154caa;*/
                 /*background-color:#154caa;*/
                 /*color:#fafafa;*/
+/*
 }
 .button:hover  {
                 background-color:#fafafa;
                 color:#207cca;
 }
+*/

@@ -60,12 +60,19 @@
                         </li>
                     </ul>
           <span>
-                <form id="searchForm">
-                    <input type="search" class="search" placeholder="Search for..." required>
-                    <select required>
-                    <option value="offers">Offers</option>
-                    <option value="needs">Needs</option></select>
-                    <input type="submit" class="btn btn-primary searchButton" value="Search">
+                <form id="searchForm" class="form-inline" role="form">
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search for..." required>
+                    </div>
+                    <div class="form-group">
+                        <select required class="form-control">
+                            <option value="offers">Offers</option>
+                            <option value="needs">Needs</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary form-control" value="Search">
+                    </div>
                 </form>
             </span>
             </nav>
