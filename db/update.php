@@ -61,6 +61,7 @@ try {
             $addToSet->timestamp  = $gmtTime;
             $query                = new stdClass();
             $set                  = new stdClass();
+            $set->_id             = $postEntry->_id;
             $set->kind            = $postEntry->kind;
             $set->category        = $postEntry->category;
             $set->title           = $postEntry->title;
@@ -82,10 +83,15 @@ try {
             $query->{'$addToSet'} = new stdClass();
             $query->{'$addToSet'}->history = $addToSet;
             // convert $query from stdObject to an arrayObject
-            $query = stdObject_to_arrayObject($query);
+            
+//            $query = stdObject_to_arrayObject($query);
     //var_dump($query);die;
             // database query
-            $cursor = $collection->update($find,$query);
+ //           $cursor = $collection->update($find,$query);
+            $set = stdObject_to_arrayObject($set);
+    //var_dump($query);die;
+            // database query
+            $cursor = $collection->insert($set);
             // return result of database query
             if ($cursor["ok"] == 1) {
                 $status = array(
