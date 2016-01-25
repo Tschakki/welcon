@@ -44,6 +44,8 @@ try {
             // make $postEntry an object
             $postEntry = json_decode($_POST['postEntry']);
             $realmongoid = new MongoId($postEntry->_id);
+            $find2      = array();
+            $find2 = array('_id' => $postEntry->_id);
                 // Pass the actual instance of the MongoId object to the query
             $find = array('_id' => $realmongoid);
             
@@ -89,28 +91,33 @@ try {
             // database query
  //           $cursor = $collection->update($find,$query);
             $set = stdObject_to_arrayObject($set);
+            $find2 = stdObject_to_arrayObject($find2);
     //var_dump($query);die;
-            // database query
-            $cursor = $collection->insert($set);
-            // return result of database query
-            if ($cursor["ok"] == 1) {
-                $status = array(
-                    "status"   => array(
-                        "code" => 200,
-                        "msg"  => "success,update success"),
-                    "data"     => "true"
-                );
-                echo json_encode($status);
-                die;
-            } else {
-                $status = array(
-                    "status"   => array(
-                        "code" => 409,
-                        "msg"  => "danger,update failed"),
-                    "data"     => NULL
-                );
-                echo json_encode($status);
-                die;
+            $cursor2 = $collection->remove($find2);
+            if ($cursor2["ok"] == 1) {
+                //echo "is weg";die;
+                // database query
+                $cursor = $collection->insert($set);
+                // return result of database query
+                if ($cursor["ok"] == 1) {
+                    $status = array(
+                        "status"   => array(
+                            "code" => 200,
+                            "msg"  => "success,update success"),
+                        "data"     => "true"
+                    );
+                    echo json_encode($status);
+                    die;
+                } else {
+                    $status = array(
+                        "status"   => array(
+                            "code" => 409,
+                            "msg"  => "danger,update failed"),
+                        "data"     => NULL
+                    );
+                    echo json_encode($status);
+                    die;
+                }
             }
         }
     } else {
