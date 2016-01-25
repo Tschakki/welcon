@@ -5,7 +5,7 @@
     display: block;
 	float : left;
     height: 50vh;
-    width: 100%;
+    width: 50%;
     align-items: baseline;
     margin-top: 1em;
 }
@@ -41,6 +41,7 @@ label{
     float: left;
     width: 10%;
     text-align: right;
+    margin-right: 1.5em;
 }
 .frontLable {
         clear: left;
@@ -112,6 +113,7 @@ option {
 }
 .glyphicon {
     cursor:pointer
+        
 }
 .search {
                 padding:8px 40px;
