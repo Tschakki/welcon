@@ -6,8 +6,7 @@ $(document).ready(function() {
       case "/welcon/index.php":
         initmap(function() {
          //Beginn der Slideshow
-             if (document.getElementById("changeText")) {
-
+             /*if (document.getElementById("changeText")) {
                  var find = new Object();
                 find.myId = "";
                 find.actionID = "all";
@@ -66,7 +65,7 @@ $(document).ready(function() {
                         }
                     },
                 });
-             } 
+             } */
         });
         break;
       case "/welcon/entryForm.php":
@@ -575,6 +574,7 @@ $(document).ready(function() {
             success: function (data) {
     var response = $.parseJSON(data);
                 if (response.status) {
+                    window.location.href = "settings.php";
                     $.notify({
                         message: 'Speichern von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!'
                     }, {
@@ -624,6 +624,7 @@ function ajaxUPDATE  (form) {
             success: function (data) {
     var response = $.parseJSON(data);
                 if (response.status["code"] == 200) {
+                    window.location.href = "settings.php";
                     $.notify({
                         message: 'Bearbeiten von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!'
                     }, {
@@ -664,11 +665,8 @@ function ajaxUPDATE  (form) {
             url: "db/delete.php",
             data: { id_of_div: $('#span div').html()
             },
-            success: function (data) {
-                console.log("In data steckt: " + data);
-               console.log ("vor dem parseJSON, dass Fehler wirft."); 
-    var response = $.parseJSON(data);
-               
+            success: function (data) { 
+                var response = $.parseJSON(data);           
                 if (response.status) {
                     $.notify({
                         message: 'Löschen von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!'

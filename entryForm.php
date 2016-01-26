@@ -33,16 +33,18 @@
         <label class="frontLable" for="description">Description:</label>
         <textarea name="description" id="description" form="editNeed" cols="75" rows="15" class="form-control"></textarea>
     </div>
-    <div class="form-group row">
+    <div class="form-group">
         <label class="frontLable" for="latitude">Location:</label>
     </div>
-    <div class="form-group row">
+    <div class="form-group">
             <section id="map"></section>
             <input id="latitude" type="hidden" name="latitude" form="editNeed" placeholder="Latitude" class="form-control"  />
             <input id="longitude" type="hidden" name="longitude" form="editNeed" placeholder="Longitude" class="form-control"  />  
     </div>
     <div class="form-group">
         <label class="frontLable" for="name">Author:</label>
+        </div>
+    <div class="form-group">
         <input type="name" name="name" id="name" form="editNeed" size="25" class="form-control" />
     </div>
     <div class="form-group">
