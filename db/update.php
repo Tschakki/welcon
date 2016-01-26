@@ -43,6 +43,12 @@ try {
             $gmtTime = gmdate('d.m.Y H:i:s', $mongoTimestamp->sec);
             // make $postEntry an object
             $postEntry = json_decode($_POST['postEntry']);
+            //$realmongoid = new MongoId($postEntry->_id);
+            //$find2      = array();
+            $find2 = array('myId' => $postEntry->myId);
+                // Pass the actual instance of the MongoId object to the query
+            $find = array('myId' => $postEntry->myId);
+            
             // connect to mongodb
             $m = new MongoClient();
             // select a database
@@ -52,44 +58,72 @@ try {
             $c = "entry";
             $collection = $db->$c;
             // set $query
-            $query                  = new stdClass();
-            $query->_id             = $postEntry->_id;
-            $query->kind            = $postEntry->kind;
-            $query->title           = $postEntry->title;
-            $query->category        = $postEntry->category;
-            $query->name            = $postEntry->name;
-            $query->email           = $postEntry->email;
-            $query->lat             = $postEntry->lat;
-            $query->lon             = $postEntry->lon;
-            $query->description     = $postEntry->description;
-            $query->imageURL        = $postEntry->imageURL;
-            $query->timestamp       = $gmtTime;
-            $history                = clone $query;
-            $history->action        = 'create';
-    //        $query->_id             = $postObject->glossarID;
-            $query->history         = new stdClass();
-            $query->history         = (object)array($history);
-    
+            // set $addToSet
+            $addToSet             = new stdClass();
+            $addToSet->timestamp  = $gmtTime;
+            $query                = new stdClass();
+            $set                  = new stdClass();
+            $set->myId            = $postEntry->myId;
+            $set->kind            = $postEntry->kind;
+            $set->category        = $postEntry->category;
+            $set->title           = $postEntry->title;
+            $set->description     = $postEntry->description;
+            $set->lat             = $postEntry->lat;
+            $set->lon             = $postEntry->lon;
+            $set->name            = $postEntry->name;
+            $set->imageURL        = $postEntry->imageURL;
+            $set->email           = $postEntry->email;
+            
+            $set->timestamp       = $gmtTime;
+            $history              = clone $set;
+     //       $history->action      = 'update';
+    //        $query->_id         = $postObject->glossarID;
+            $addToSet             = new stdClass();
+            $addToSet             = (object)array($history);
+            $query = new stdClass();
+            $query->{'$set'} = $set;
+            $query->{'$addToSet'} = new stdClass();
+            $query->{'$addToSet'}->history = $addToSet;
             // convert $query from stdObject to an arrayObject
-            $query = stdObject_to_arrayObject($query);
+            
+//            $query = stdObject_to_arrayObject($query);
     //var_dump($query);die;
             // database query
-            $cursor = $collection->insert($query);
-            // return result of database query
-            if ($cursor["ok"] == 1) {
-                $status = array(
-                    "status"   => array(
-                        "code" => 200,
-                        "msg"  => "success,insert success"),
-                    "data"     => "true"
-                );
-                echo json_encode($status);
-                die;
+ //           $cursor = $collection->update($find,$query);
+            $set = stdObject_to_arrayObject($set);
+            //$find2 = stdObject_to_arrayObject($find2);
+    //var_dump($query);die;
+            $cursor2 = $collection->remove($find2);
+           // var_dump($cursor2);
+            if ($cursor2["ok"] == 1) {
+                //echo "is weg";die;
+                // database query
+                $cursor = $collection->insert($set);
+                // return result of database query
+                if ($cursor["ok"] == 1) {
+                    $status = array(
+                        "status"   => array(
+                            "code" => 200,
+                            "msg"  => "success,update success"),
+                        "data"     => "true"
+                    );
+                    echo json_encode($status);
+                    die;
+                } else {
+                    $status = array(
+                        "status"   => array(
+                            "code" => 409,
+                            "msg"  => "danger,update failed"),
+                        "data"     => NULL
+                    );
+                    echo json_encode($status);
+                    die;
+                }
             } else {
                 $status = array(
                     "status"   => array(
                         "code" => 409,
-                        "msg"  => "danger,insert failed"),
+                        "msg"  => "danger,update(rm) failed"),
                     "data"     => NULL
                 );
                 echo json_encode($status);

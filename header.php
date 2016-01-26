@@ -5,6 +5,9 @@
     <!-- Set the viewport so this responsive site displays correctly on mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Include bootstrap CSS -->
+     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
      <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
     <link href="includes/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="includes/style.css" rel="stylesheet">
@@ -57,12 +60,19 @@
                         </li>
                     </ul>
           <span>
-                <form id="searchForm">
-                    <input type="search" class="search" placeholder="Search for..." required>
-                    <select required>
-                    <option value="offers">Offers</option>
-                    <option value="needs">Needs</option></select>
-                    <input type="submit" class="btn btn-primary searchButton" value="Search">
+                <form id="searchForm" class="form-inline" role="form">
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search for..." required>
+                    </div>
+                    <div class="form-group">
+                        <select required class="form-control">
+                            <option value="offers">Offers</option>
+                            <option value="needs">Needs</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary form-control" value="Search">
+                    </div>
                 </form>
             </span>
             </nav>

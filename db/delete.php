@@ -35,9 +35,9 @@ try {
             $parameters = new stdClass();
             $find2      = array();
             // make $find an object
-            $realmongoid = new MongoId($find->_id);
+            //$realmongoid = new MongoId($find->myId);
                 // Pass the actual instance of the MongoId object to the query
-            $find2 = array('_id' => $realmongoid);
+            $find2 = array('myId' => $find->myId);
     //        print_r($find2);die;
             // connect to mongodb
             $m          = new MongoClient();
@@ -48,40 +48,6 @@ try {
             $c          = "entry";
             $collection = $db->$c;
             $cursor = $collection->remove($find2);
-        
-            /*// iterate cursor to display title of documents
-            echo "Inhalt der Collection vor dem Delete ";
-            
-            foreach ($cursor as $document) {
-            echo "<p>Titel: " . $document["title"] . "\n</p>";
-            echo "<p>ID: " . $document["_id"] . "\n</p>";
-            }
-            // ID-
-            
-            // now remove the document
-            echo "<p>start von delete</p>";
-            
-            $collection->remove( array( '_id' => new MongoID( '56915856f0f4fe780c8b4567' ) ) );
-            echo "<p>Document deleted successfully</p>   ";
-            
-            // iterate cursor to display title of documents
-            echo "Inhalt der Collection nach dem Delete ";
-            
-            foreach ($cursor as $document) {
-            echo "Titel: " . $document["title"] . "\n";
-            }
-            
-            // now display the available documents
-            $cursor = $collection->find();
-            
-            // iterate cursor to display title of documents
-            echo "Updated document";
-            
-            foreach ($cursor as $document) {
-            echo $document["title"] . "\n";
-            }*/
-            //var_dump($cursor);die;
-            ///$array  = iterator_to_array($cursor);
             
             if ($cursor["ok"] > 0) {
                 $status = array(

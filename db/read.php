@@ -49,15 +49,17 @@ try {
                 $parameters->_id = 0;
             } elseif ($find->actionID == 'one') {
                 // THIS is how you find something by MongoId
-                $realmongoid = new MongoId($find->_id);
+                //$realmongoid = new MongoId($find->_id);
                 // Pass the actual instance of the MongoId object to the query
-                $find2 = array('_id' => $realmongoid);
+                $find2 = array('myId' => $find->myId);
+                $parameters->timestamp = 0;
+                $parameters->history = 0;
                 $parameters->_id = 0;
               //$find2->_id = 'ObjectId("' . $find->_id . '")';
                //$find2 = $find->_id;
               
             } elseif ($find->actionID == 'list') {
-                $parameters->_id = 1;
+                $parameters->myId = 1;
                 $parameters->title = 1;
                 $parameters->description = 1;
                 $parameters->name = 1;
