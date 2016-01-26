@@ -40,14 +40,22 @@ function initmap(callback) {
                  $.notify({
                     message: 'Lesen von den Einträgen erfolgreich!'
                 }, {
-                    type: 'success'
+                    type: 'success',
+                    placement: {
+                        from: 'bottom',
+                        align: 'right'
+                    }
                 });
                 return response;
             } else {
                 $.notify({
                     message: 'Lesen von ' + localStorage.getItem('selectedEntry') + ' nicht erfolgreich!'
                 }, {
-                    type: 'warning'
+                    type: 'warning',
+                    placement: {
+                        from: 'bottom',
+                        align: 'right'
+                    }
                 });
             }
         },
@@ -93,14 +101,22 @@ function showMap(callback) {
                 $.notify({
                     message: 'Lesen von den Eiträgen erfolgreich!'
                 }, {
-                    type: 'success'
+                    type: 'success',
+                    placement: {
+                        from: 'bottom',
+                        align: 'right'
+                    }
                 });
                 return response;
             } else {
                 $.notify({
                     message: 'Lesen von ' + localStorage.getItem('selectedEntry') + ' nicht erfolgreich!'
                 }, {
-                    type: 'warning'
+                    type: 'warning',
+                    placement: {
+                        from: 'bottom',
+                        align: 'right'
+                    }
                 });
             }
         },
@@ -146,14 +162,22 @@ function showMarker(lat,lon,callback) {
                 $.notify({
                     message: 'Lesen von den Einträgen erfolgreich!'
                 }, {
-                    type: 'success'
+                    type: 'success',
+                    placement: {
+                        from: 'bottom',
+                        align: 'right'
+                    }
                 });
                 return response;
             } else {
                 $.notify({
                     message: 'Lesen von den Einträgen nicht erfolgreich!'
                 }, {
-                    type: 'warning'
+                    type: 'warning',
+                    placement: {
+                        from: 'bottom',
+                        align: 'right'
+                    }
                 });
             }
         },

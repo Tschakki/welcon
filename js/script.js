@@ -44,7 +44,11 @@ $(document).ready(function() {
                             $.notify({
                                 message: 'Lesen von den Einträgen erfolgreich!'
                             }, {
-                                type: 'success'
+                                type: 'success',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'right'
+                            }
                             });
                             return response;
                         //                     alert("true: "+response.data);
@@ -53,7 +57,11 @@ $(document).ready(function() {
                             $.notify({
                                 message: 'Lesen von ' + localStorage.getItem('selectedEntry') + ' nicht erfolgreich!'
                             }, {
-                                type: 'warning'
+                                type: 'warning',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'right'
+                            }
                             });
                         }
                     },
@@ -102,7 +110,11 @@ $(document).ready(function() {
                             $.notify({
                                 message: 'Lesen von den Einträgen erfolgreich!'
                             }, {
-                                type: 'success'
+                                type: 'success',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'right'
+                                }
                             });
                             return response;
                         //                     alert("true: "+response.data);
@@ -111,7 +123,11 @@ $(document).ready(function() {
                             $.notify({
                                 message: 'Lesen von ' + localStorage.getItem('selectedEntry') + ' nicht erfolgreich!'
                             }, {
-                                type: 'warning'
+                                type: 'warning',
+                                placement: {
+                                    from: 'bottom',
+                                    align: 'right'
+                                }
                             });
                             
                         }
@@ -146,13 +162,21 @@ $(document).ready(function() {
                     $.notify({
                         message: 'Lesen von ' + localStorage.getItem('id') + ' erfolgreich!'
                     }, {
-                        type: 'success'
+                        type: 'success',
+                        placement: {
+                            from: 'bottom',
+                            align: 'right'
+                    }
                     });
                 } else {
                     $.notify({
                         message: 'Lesen von ' + localStorage.getItem('id') + ' nicht erfolgreich!'
                     }, {
-                        type: 'warning'
+                        type: 'warning',
+                        placement: {
+                            from: 'bottom',
+                            align: 'right'
+                    }
                     });
                 }
             },
@@ -207,13 +231,21 @@ $(document).ready(function() {
                     $.notify({
                         message: 'Lesen von ' + localStorage.getItem('id') + ' erfolgreich!'
                     }, {
-                        type: 'success'
+                        type: 'success',
+                        placement: {
+                            from: 'bottom',
+                            align: 'right'
+                    }
                     });
                 } else {
                     $.notify({
                         message: 'Lesen von ' + localStorage.getItem('id') + ' nicht erfolgreich!'
                     }, {
-                        type: 'warning'
+                        type: 'warning',
+                        placement: {
+                            from: 'bottom',
+                            align: 'right'
+                    }
                     });
                 }
             },
@@ -462,13 +494,21 @@ $(document).ready(function() {
                     $.notify({
                         message: 'Löschen von ' + localStorage.getItem('id') + ' erfolgreich!'
                     }, {
-                        type: 'success'
+                        type: 'success',
+                        placement: {
+                            from: 'bottom',
+                            align: 'right'
+                    }
                     });
                 } else {
                     $.notify({
                         message: 'Löschen von ' + localStorage.getItem('id') + ' nicht erfolgreich!'
                     }, {
-                        type: 'warning'
+                        type: 'warning',
+                        placement: {
+                            from: 'bottom',
+                            align: 'right'
+                    }
                     });
                 }
             },
@@ -538,13 +578,21 @@ $(document).ready(function() {
                     $.notify({
                         message: 'Speichern von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!'
                     }, {
-                        type: 'success'
+                        type: 'success',
+                        placement: {
+                            from: 'bottom',
+                            align: 'right'
+                    }
                     });
                 } else {
                     $.notify({
                         message: 'Speichern von ' + localStorage.getItem('selectedEntry') + ' nicht erfolgreich!'
                     }, {
-                        type: 'warning'
+                        type: 'warning',
+                        placement: {
+                            from: 'bottom',
+                            align: 'right'
+                    }
                     });
                 }
             },
@@ -579,13 +627,21 @@ function ajaxUPDATE  (form) {
                     $.notify({
                         message: 'Bearbeiten von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!'
                     }, {
-                        type: 'success'
+                        type: 'success',
+                        placement: {
+                            from: 'bottom',
+                            align: 'right'
+                    }
                     });
                 } else {
                     $.notify({
                         message: 'Bearbeiten von ' + localStorage.getItem('selectedEntry') + ' nicht erfolgreich!'
                     }, {
-                        type: 'danger'
+                        type: 'danger',
+                        placement: {
+                            from: 'bottom',
+                            align: 'right'
+                    }
                     });
                 }
             },
@@ -617,13 +673,21 @@ function ajaxUPDATE  (form) {
                     $.notify({
                         message: 'Löschen von ' + localStorage.getItem('selectedEntry') + ' erfolgreich!'
                     }, {
-                        type: 'success'
+                        type: 'success',
+                        placement: {
+                            from: 'bottom',
+                            align: 'right'
+                    }
                     });
                 } else {
                     $.notify({
                         message: 'Löschen von ' + localStorage.getItem('selectedEntry') + ' nicht erfolgreich!'
                     }, {
-                        type: 'warning'
+                        type: 'warning',
+                        placement: {
+                            from: 'bottom',
+                            align: 'right'
+                    }
                     });
                 }
             },
