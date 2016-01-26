@@ -443,6 +443,30 @@ $(document).ready(function() {
            // console.dir(parDIV);
           }
         });*/
+    });
+    $(document).on("click", ".eye-open", function() {
+        var parDIV = $(this);
+        localStorage.setItem("id", parDIV[0].id);
+        /*var paket = []
+        paket = '{ "id": "' + parDIV[0].id + '"}';
+        paket = $.parseJSON(paket);*/
+        //window.location.href = "entry.php";
+         var myForm = document.createElement("form");
+        myForm.action= "entry.php"; //this.href;// the href of the link
+        //myForm.target="myFrame";
+        myForm.method="GET";
+        var myInput = document.createElement("input");
+        myInput.setAttribute('type',"text");
+        myInput.setAttribute('id',"id");
+        myInput.setAttribute('name',"id");
+        myInput.setAttribute('value',parDIV[0].id);
+        var myButton = document.createElement("input");
+        myButton.setAttribute('type',"submit");
+        myButton.setAttribute('value',"Submit");
+        myForm.appendChild(myInput);
+        myForm.appendChild(myButton);
+        document.getElementsByTagName('body')[0].appendChild(myForm);
+        myForm.submit();
     }); 
     $(document).on("click", ".glyphicon-edit", function() {
         var parDIV = $(this).parent().parent().parent();

@@ -38,9 +38,7 @@
             <section id="map"></section>
             <input id="latitude" type="hidden" name="latitude" form="editNeed" placeholder="Latitude" class="form-control"  />
             <input id="longitude" type="hidden" name="longitude" form="editNeed" placeholder="Longitude" class="form-control"  /> 
-        
     </div>
-        <br>
     <div class="form-group">
         <label class="frontLable" for="name">Author:</label>
         <input type="name" name="name" id="name" form="editNeed" size="25" class="form-control" />
