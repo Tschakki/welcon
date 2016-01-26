@@ -222,7 +222,7 @@ function stateChanged(plots) {
             //brauchen wir die folgende zeile?
             plotmark.data=plotlist[i];
             map.addLayer(plotmark);
-            plotmark.bindPopup("<h3>"+plotlist[i].title + "</h3>"+plotlist[i].description);
+            plotmark.bindPopup("<h3>"+plotlist[i].title + "</h3><p>"+plotlist[i].description+"</p><span id='"+plotlist[i].myId+"' class='glyphicon glyphicon-eye-open eye-open'></span>");
             plotlayers.push(plotmark);
         }
     }
