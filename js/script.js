@@ -88,6 +88,7 @@ $(document).ready(function() {
                             //for (i=0;i<response.data.length;i++){
               //              response.forEach(function(item) {
                                 $("#listEntries").append('<div id="' + response.data[key].myId + '" class="row"><div class="col-md-3"><h3>'  + response.data[key].title + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].description + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].name + '</h3></div><div class="col-md-3"><h3><span id="' + response.data[key].myId + '" class="glyphicon glyphicon-eye-open"></span><span id="' + response.data[key].myId + '" class="glyphicon glyphicon-edit"></span><span id="deleteButton" class="glyphicon glyphicon-trash"></span></h3></div></div>');
+
                                     
                 
                                 }
