@@ -9,7 +9,7 @@ $(document).ready(function() {
              if (document.getElementById("changeText")) {
 
                  var find = new Object();
-                find._id = "";
+                find.myId = "";
                 find.actionID = "all";
 
                 var promise = $.ajax({
@@ -67,7 +67,7 @@ $(document).ready(function() {
         break;
       case "/welcon/settings.php":
             var find = new Object();
-                find._id = "";
+                find.myId = "";
                 find.actionID = "list";
 
                 var promise = $.ajax({
@@ -87,16 +87,16 @@ $(document).ready(function() {
                                    // console.dir(response.data[key]);
                             //for (i=0;i<response.data.length;i++){
               //              response.forEach(function(item) {
-                                $("#listEntries").append('<div id="' + key + '" class="row"><div class="col-md-3"><h3>'  + response.data[key].title + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].description + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].name + '</h3></div><div class="col-md-3"><h3><span id="' + key + '" class="glyphicon glyphicon-eye-open"></span><span id="' + key + '" class="glyphicon glyphicon-edit"></span><span id="deleteButton" class="glyphicon glyphicon-trash"></span></h3></div></div>');
+                                $("#listEntries").append('<div id="' + response.data[key].myId + '" class="row"><div class="col-md-3"><h3>'  + response.data[key].title + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].description + '</h3></div><div class="col-md-3"><h3>'  + response.data[key].name + '</h3></div><div class="col-md-3"><h3><span id="' + response.data[key].myId + '" class="glyphicon glyphicon-eye-open"></span><span id="' + response.data[key].myId + '" class="glyphicon glyphicon-edit"></span><span id="deleteButton" class="glyphicon glyphicon-trash"></span></h3></div></div>');
                                     
                 
                                 }
                                 
                             }
                             
-                        var container = document.getElementById(key).parentNode;
+/*                        var container = document.getElementById(key).parentNode;
                             console.log("container: " + container);
-                        console.log("ID vom Lösch-Button: " +  key);
+                        console.log("ID vom Lösch-Button: " +  key);*/
 
                             $.notify({
                                 message: 'Lesen von den Einträgen erfolgreich!'
@@ -122,7 +122,7 @@ $(document).ready(function() {
         break;
       case "/welcon/entry.php":
             var find = new Object();
-                find._id = localStorage.getItem("id");
+                find.myId = localStorage.getItem("id");
                 find.actionID = "one";
 
                 var promise = $.ajax({
@@ -185,7 +185,7 @@ $(document).ready(function() {
             }
             showMap(function() { 
             var find = new Object();
-                find._id = localStorage.getItem("id");
+                find.myId = localStorage.getItem("id");
                 find.actionID = "one";
 
                 var promise = $.ajax({
@@ -442,7 +442,7 @@ $(document).ready(function() {
         var parDIV = $(this).parent().parent().parent();
         localStorage.setItem("id", parDIV[0].id);
         var find = new Object();
-                find._id = localStorage.getItem('id');
+                find.myId = localStorage.getItem('id');
                 find.actionID = "one";
 
                 var promise = $.ajax({
@@ -554,7 +554,7 @@ function ajaxUPDATE  (form) {
        console.log("form: " + form);
         var postEntry = new Object();
         localStorage.setItem("selectedEntry", $("#id").val());
-        postEntry._id = $("#id").val();
+        postEntry.myId = $("#id").val();
         postEntry.kind = $("#chooseKind").val();
         postEntry.title = $("#title").val();
         postEntry.category = $("#chooseCategory").val();

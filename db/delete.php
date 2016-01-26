@@ -35,9 +35,9 @@ try {
             $parameters = new stdClass();
             $find2      = array();
             // make $find an object
-            $realmongoid = new MongoId($find->_id);
+            //$realmongoid = new MongoId($find->myId);
                 // Pass the actual instance of the MongoId object to the query
-            $find2 = array('_id' => $realmongoid);
+            $find2 = array('myId' => $find->myId);
     //        print_r($find2);die;
             // connect to mongodb
             $m          = new MongoClient();

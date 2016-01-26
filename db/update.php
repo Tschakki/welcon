@@ -43,11 +43,11 @@ try {
             $gmtTime = gmdate('d.m.Y H:i:s', $mongoTimestamp->sec);
             // make $postEntry an object
             $postEntry = json_decode($_POST['postEntry']);
-            $realmongoid = new MongoId($postEntry->_id);
-            $find2      = array();
-            $find2 = array('_id' => $postEntry->_id);
+            //$realmongoid = new MongoId($postEntry->_id);
+            //$find2      = array();
+            $find2 = array('myId' => $postEntry->myId);
                 // Pass the actual instance of the MongoId object to the query
-            $find = array('_id' => $realmongoid);
+            $find = array('myId' => $postEntry->myId);
             
             // connect to mongodb
             $m = new MongoClient();
@@ -63,7 +63,7 @@ try {
             $addToSet->timestamp  = $gmtTime;
             $query                = new stdClass();
             $set                  = new stdClass();
-            $set->_id             = $postEntry->_id;
+            $set->myId            = $postEntry->myId;
             $set->kind            = $postEntry->kind;
             $set->category        = $postEntry->category;
             $set->title           = $postEntry->title;
@@ -91,9 +91,10 @@ try {
             // database query
  //           $cursor = $collection->update($find,$query);
             $set = stdObject_to_arrayObject($set);
-            $find2 = stdObject_to_arrayObject($find2);
+            //$find2 = stdObject_to_arrayObject($find2);
     //var_dump($query);die;
             $cursor2 = $collection->remove($find2);
+           // var_dump($cursor2);
             if ($cursor2["ok"] == 1) {
                 //echo "is weg";die;
                 // database query
@@ -118,6 +119,15 @@ try {
                     echo json_encode($status);
                     die;
                 }
+            } else {
+                $status = array(
+                    "status"   => array(
+                        "code" => 409,
+                        "msg"  => "danger,update(rm) failed"),
+                    "data"     => NULL
+                );
+                echo json_encode($status);
+                die;
             }
         }
     } else {

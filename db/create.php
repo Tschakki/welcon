@@ -43,6 +43,7 @@ try {
             $gmtTime = gmdate('d.m.Y H:i:s', $mongoTimestamp->sec);
             // make $postEntry an object
             $postEntry = json_decode($_POST['postEntry']);
+            $unique = $postEntry->title . substr($postEntry->lat,0,2) . substr($postEntry->lon,3,3);
             // connect to mongodb
             $m = new MongoClient();
             // select a database
@@ -53,6 +54,7 @@ try {
             $collection = $db->$c;
             // set $query
             $query                  = new stdClass();
+            $query->myId            = $unique;
             $query->kind            = $postEntry->kind;
             $query->category        = $postEntry->category;
             $query->title           = $postEntry->title;
